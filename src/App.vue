@@ -1,25 +1,16 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <AuthExample />
-    <FirestoreExample />
+    <!-- Le composant qui affichera la vue selon la route active -->
+    <router-view />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
-import AuthExample from './components/AuthExample.vue';
-import FirestoreExample from './components/FirestoreExample.vue';
+import { defineComponent } from 'vue';
 
-export default {
+export default defineComponent({
   name: 'App',
-  components: {
-    HelloWorld,
-    AuthExample,
-    FirestoreExample,
-  },
-};
+});
 </script>
 
 <style>
@@ -32,4 +23,3 @@ export default {
   margin-top: 60px;
 }
 </style>
-
