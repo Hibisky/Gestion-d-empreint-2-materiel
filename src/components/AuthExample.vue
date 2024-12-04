@@ -1,14 +1,15 @@
 <!-- src/components/AuthExample.vue -->
 <template>
   <div>
-    <h1>Authentication Example</h1>
     <form @submit.prevent="login">
       <div>
         <label for="email">Email:</label>
         <input type="email" v-model="email" required />
       </div>
       <div>
-        <label for="password">Password:</label>
+        <label for="password">Password:
+          
+        </label>
         <input type="password" v-model="password" required />
       </div>
       <button type="submit">Login</button>

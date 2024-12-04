@@ -2,23 +2,41 @@
   <div id="app">
     <!-- Header -->
     <header class="navbar is-primary">
+      <div>
+    <!-- Barre de navigation -->
+    <header class="navbar is-primary">
+      <!-- Logo à gauche -->
       <div class="navbar-brand">
         <a class="navbar-item" href="#">
-          <img alt="Vue logo" src="./assets/logo.png" style="height: 40px;">
+          <img alt="Vue logo" src="./assets/locamat.png" style="height: 40px;">
         </a>
-        <a class="navbar-item has-text-white" href="#">Accueil</a>
-        <a class="navbar-item has-text-white" href="#about">À propos</a>
-        <a class="navbar-item has-text-white" href="#contact">Contact</a>
       </div>
+
+      <!-- Menu centré -->
+      <div class="navbar-menu is-active">
+        <div class="navbar-start" style="margin: auto;">
+          <a class="navbar-item has-text-white" href="#">Accueil</a>
+          <a class="navbar-item has-text-white" href="#aide">Aide</a>
+          <a class="navbar-item has-text-white" href="#faq">FAQ</a>
+          <a class="navbar-item has-text-white" href="#contact">À propos</a>
+        </div>
+      </div>
+
+      <!-- Bouton "S'inscrire" à droite -->
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <a class="button is-light is-outlined" href="#inscription">
+            S'inscrire
+          </a>
+        </div>
+      </div>
+    </header>
+  </div>
     </header>
 
     <!-- Main Content -->
     <main class="section">
       <div class="container">
-        <h1 class="title has-text-centered">Bienvenue dans votre application Vue.js</h1>
-        <p class="subtitle has-text-centered">
-          Profitez des fonctionnalités suivantes :
-        </p>
 
         <!-- Vue components -->
         <div class="box">
@@ -37,7 +55,7 @@
     <footer class="footer">
       <div class="content has-text-centered">
         <p>
-          <strong>Mon Site</strong> - Créé avec Vue.js et Bulma. &copy; 2024.
+          <strong>Mon Site</strong> 
         </p>
       </div>
     </footer>
