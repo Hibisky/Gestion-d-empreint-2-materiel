@@ -1,16 +1,23 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-
-//Import librairie bulma
-import 'bulma/css/bulma.css'
-
+import './assets/global.css'; // Import du fichier CSS global
+import router from './router';
+import 'bulma/css/bulma.css'  //import bulma
 import { db, auth } from './firebase.js'; //import firebase
 
 const app = createApp(App);
 
-//ajouter firebase à l'instance Vue si nécessaire
+app.use(router);
+
+app.mount('#app');
+
+
+createApp(App).mount('#app');
+
 
 app.config.globalProperties.$db = db;
 app.config.globalProperties.$auth=auth;
 
 app.mount('#app');
+
+

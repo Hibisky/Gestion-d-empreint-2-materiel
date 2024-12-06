@@ -1,8 +1,5 @@
 <template>
   <div id="app">
-    <!-- Header -->
-    <header class="navbar is-primary">
-      <div>
     <!-- Barre de navigation -->
     <header class="navbar is-primary">
       <!-- Logo à gauche -->
@@ -31,16 +28,13 @@
         </div>
       </div>
     </header>
-  </div>
-    </header>
 
-    <!-- Main Content -->
+    <!-- Contenu principal -->
     <main class="section">
       <div class="container">
-
-        <!-- Vue components -->
+        <!-- Composants Vue -->
         <div class="box">
-          <HelloWorld msg="Welcome to Your Vue.js App" />
+          <HelloWorld msg="Bienvenue sur votre application Vue.js" />
         </div>
         <div class="box">
           <AuthExample />
@@ -51,12 +45,38 @@
       </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="content has-text-centered">
+    <!-- Pied de page -->
+    <footer>
+      <div class="footer-section">
+        <h4>LOCAMAT</h4>
+        <p>Dernier Blog Post</p>
         <p>
-          <strong>Mon Site</strong> 
+          Qui sommes nous ? LocaMat est une entreprise qui prête à ses collaborateurs tout type
+          d'équipement, souris, claviers, écrans, casques, etc...
         </p>
+      </div>
+      <div class="footer-section">
+        <h4>Produits</h4>
+        <ul>
+          <li>Produit1</li>
+          <li>Produit2</li>
+          <li>Produit3</li>
+          <li>Produit4</li>
+          <li>Produit5</li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Départements</h4>
+        <ul>
+          <li>Dépt1</li>
+          <li>Dépt2</li>
+          <li>Dépt3</li>
+          <li>Dépt4</li>
+          <li>Dépt5</li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2023 — 2024 Contrat — Privé</p>
       </div>
     </footer>
   </div>
@@ -77,21 +97,14 @@ export default {
 };
 </script>
 
-<style>
-/* Styles globaux */
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-/* Ajuste les marges et l'espacement */
+<style scoped>
+/* Styles spécifiques à ce composant */
+/* Ajuste l'espacement des sections */
 .section {
   margin-top: 20px;
 }
 
+/* Style des boîtes */
 .box {
   margin-bottom: 20px;
 }
