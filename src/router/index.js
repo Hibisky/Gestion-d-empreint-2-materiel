@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from '@/views/HomePage.vue';
 import ContactPage from '@/views/ContactPage.vue';
-import FAQ from '@/views/FAQPage.vue';
-import Aide from '@/views/AboutPage.vue';
-import InscriptionPage from '@/views/FormulaireInscription.vue';
+import FAQPage from '@/views/FAQPage.vue';
+import AboutPage from '@/views/AboutPage.vue';
+import FormulaireInscription from '@/views/FormulaireInscription.vue';
 
 const routes = [
   { path: '/', name: 'HomePage', component: HomePage },
