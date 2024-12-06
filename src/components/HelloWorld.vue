@@ -1,5 +1,3 @@
-
-
 // Import the Google Font
 @import url("https://fonts.googleapis.com/css?family=Nunito:400,700");
 <script>

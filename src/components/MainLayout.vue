@@ -1,5 +1,5 @@
 <template>
-    <div id="layout">
+    <div id="Mainlayout">
       <Navbar />
       <main>
         <slot /> <!-- Affiche le contenu des pages -->
@@ -11,10 +11,10 @@
   </template>
   
   <script>
-  import Navbar from './Navbar.vue';
+  import Navbar from './NavbarEx.vue';
   
   export default {
-    name: 'Layout',
+    name: 'MainLayout',
     components: {
       Navbar,
     },
