@@ -19,7 +19,7 @@ app.config.globalProperties.$db = db;
 app.config.globalProperties.$auth=auth;
 
 app.use(router);
-app.mount('#app');
+
 
 
 
