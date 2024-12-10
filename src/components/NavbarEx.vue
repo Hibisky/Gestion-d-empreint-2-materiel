@@ -8,7 +8,7 @@
       <div class="navbar-menu is-active">
         <div class="navbar-start">
           <router-link class="navbar-item has-text-white" to="/">Accueil</router-link>
-          <router-link class="navbar-item has-text-white" to="/aide">Aide</router-link>
+          <router-link class="navbar-item has-text-white" to="/aide">About</router-link>
           <router-link class="navbar-item has-text-white" to="/faq">FAQ</router-link>
           <router-link class="navbar-item has-text-white" to="/contact">À propos</router-link>
         </div>

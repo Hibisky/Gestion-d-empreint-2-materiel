@@ -8,6 +8,7 @@ import { db, auth } from './firebase.js'; //import firebase
 const app = createApp(App);
 
 
+console.log('Application is starting...');
 
 app.mount('#app');
 
@@ -19,5 +20,7 @@ app.config.globalProperties.$auth=auth;
 
 app.use(router);
 app.mount('#app');
+
+
 
 

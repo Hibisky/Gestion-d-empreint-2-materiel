@@ -1,9 +1,13 @@
 <template>
-  <router-view /> <!-- Toutes les routes sont gérées par le routeur -->
+  <div id="app">
+    <router-view />
+  </div>
 </template>
+
 
 <script>
 export default {
   name: 'App',
 };
 </script>
+

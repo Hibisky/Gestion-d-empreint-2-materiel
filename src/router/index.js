@@ -6,7 +6,7 @@ import AboutPage from '@/views/AboutPage.vue';
 import FormulaireInscription from '@/views/FormulaireInscription.vue';
 
 const routes = [
-  { path: '/', name: 'HomePage', component: HomePage },
+  { path: '/', name: 'Home', component: HomePage },
   { path: '/contact', name: 'ContactPage', component: ContactPage },
   { path: '/faq', name: 'FAQPage', component: FAQPage },
   { path: '/aide', name: 'AboutPage', component: AboutPage },
@@ -17,3 +17,4 @@ export default createRouter({
   history: createWebHistory(),
   routes,
 });
+
