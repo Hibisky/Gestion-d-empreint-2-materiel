@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import { auth } from '../firebase'; // Import Firebase auth
 import AuthExample from '../components/AuthExample.vue';
 import HomePage from '../components/HomePage.vue';
+import AddDevice from '../components/AddDevice.vue';
 
 // Définition des routes
 const routes = [
@@ -14,8 +15,15 @@ const routes = [
     path: '/home',
     name: 'HomePage',
     component: HomePage, // Page d'accueil
-    meta: { requiresAuth: true }, // Cette route nécessite une authentification
+    meta: { requiresAuth: false }, // Cette route nécessite pas une authentification
   },
+  { 
+    path: '/add-device', 
+    name: 'AddDevice', 
+    component: AddDevice,
+    meta: { requiresAuth: true },
+  },
+
 ];
 
 // Création du routeur
