@@ -1,20 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomePage from '@/views/HomePage.vue';
-import ContactPage from '@/views/ContactPage.vue';
-import FAQPage from '@/views/FAQPage.vue';
-import AboutPage from '@/views/AboutPage.vue';
-import FormulaireInscription from '@/views/FormulaireInscription.vue';
 
 const routes = [
-  { path: '/', name: 'Home', component: HomePage },
-  { path: '/contact', name: 'ContactPage', component: ContactPage },
-  { path: '/faq', name: 'FAQPage', component: FAQPage },
-  { path: '/aide', name: 'AboutPage', component: AboutPage },
-  { path: '/inscription', name: 'FormulaireInscription', component: FormulaireInscription },
+  { path: '/', component: { template: '<div>Page d\'accueil</div>' } },
 ];
 
-export default createRouter({
+const router = createRouter({
   history: createWebHistory(),
   routes,
 });
 
+export default router;
