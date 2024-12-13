@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <!-- Le header global -->
+    <MainHeader />
     <!-- Le composant qui affichera la vue selon la route active -->
     <router-view />
   </div>
@@ -7,9 +9,13 @@
 
 <script>
 import { defineComponent } from 'vue';
+import MainHeader from '@/components/Header.vue'; // Importez le composant Header
 
 export default defineComponent({
   name: 'App',
+  components: {
+    MainHeader, // Déclarez le composant Header
+  },
 });
 </script>
 
@@ -20,6 +26,30 @@ export default defineComponent({
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 0px;
+}
+
+header {
+  font-size: 16px;
+  text-align: left;
+  padding: 10px;
+  background-color: #42b983;
+  color: white;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+router-link {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+router-link:hover {
+  text-decoration: underline;
 }
 </style>

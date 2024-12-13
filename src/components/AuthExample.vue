@@ -106,7 +106,7 @@ export default {
       // Si l'utilisateur est connecté, redirige vers la page HelloWorld
       if (currentUser) {
         // Rediriger vers la page HelloWorld après une connexion réussie
-        router.push({ name: 'helloWorld' });
+        router.push({ name: 'HomePage' });
       }
     });
 
@@ -114,7 +114,7 @@ export default {
     watch(user, (newUser) => {
       if (newUser) {
         // Si l'utilisateur est connecté, on peut rediriger
-        router.push({ name: 'helloWorld' });
+        router.push({ name: 'HomePage' });
       }
     });
 
