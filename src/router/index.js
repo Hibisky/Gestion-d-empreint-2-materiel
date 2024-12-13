@@ -3,7 +3,7 @@ import { auth } from '../firebase'; // Import Firebase auth
 import AuthExample from '../components/AuthExample.vue';
 import HomePage from '../components/HomePage.vue';
 import AddDevice from '../components/AddDevice.vue';
-
+import Device from '../components/Device.vue';
 // Définition des routes
 const routes = [
   {
@@ -23,6 +23,13 @@ const routes = [
     component: AddDevice,
     meta: { requiresAuth: true },
   },
+  { 
+    path: '/devices', 
+    name: 'Device', 
+    component: Device, 
+    meta: { requiresAuth: false },
+  }, 
+
 
 ];
 

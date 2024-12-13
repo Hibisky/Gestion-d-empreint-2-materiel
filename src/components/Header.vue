@@ -5,8 +5,10 @@
       <router-link to="/" v-if="!user">Connexion</router-link>
       <router-link to="/profile" v-if="user">Profil</router-link>
       <router-link to="/reservation" v-if="user">Réservation</router-link>
-      <router-link to="/home" v-if="!user">Accueil</router-link>
+      <router-link to="/home" v-if="user">Accueil</router-link>
       <router-link to="/add-device" v-if="user">Ajouter un Appareil</router-link>
+      <router-link to="/devices" v-if="user">Appareils Disponibles</router-link>
+
 
       
       <!-- Image pour déconnexion -->

@@ -19,6 +19,10 @@
           required
         ></textarea>
       </div>
+      <div>
+        <label for="image">Lien de l'image :</label>
+        <input id="image" v-model="device.image" type="url" placeholder="Lien de l'image (URL)" required />
+      </div>
       <button type="submit">Ajouter</button>
     </form>
     <p v-if="successMessage" style="color: green;">{{ successMessage }}</p>
@@ -38,6 +42,7 @@ export default {
         name: '',
         quantity: 0,
         description: '',
+        image: '', // Nouveau champ pour l'image
       },
       successMessage: '',
       errorMessage: '',
@@ -51,6 +56,7 @@ export default {
           name: this.device.name,
           quantity: this.device.quantity,
           description: this.device.description,
+          image: this.device.image, // Enregistrer l'image
           createdAt: new Date(), // Ajouter une date de création
         });
         this.successMessage = 'Appareil ajouté avec succès !';
@@ -63,6 +69,7 @@ export default {
       this.device.name = '';
       this.device.quantity = 0;
       this.device.description = '';
+      this.device.image = ''; // Réinitialiser le champ image
     },
   },
 };
