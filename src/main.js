@@ -15,3 +15,4 @@ app.config.globalProperties.$auth=auth;
 // Ajouter le router à l'instance Vue
 app.use(router);
 app.mount('#app');
+
