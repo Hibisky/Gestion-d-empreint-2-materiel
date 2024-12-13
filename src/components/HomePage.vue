@@ -31,15 +31,41 @@
 </template>
 
 <script>
+import { auth } from "../firebase"; // Importez Firebase depuis votre fichier firebase.js
+
 export default {
-  name: 'HelloWorld',
+  name: "HomePage",
   props: {
-    msg: String
-  }
-}
+    msg: String,
+  },
+  mounted() {
+    // Ajouter un écouteur pour la fermeture de la page
+    window.addEventListener("beforeunload", this.handleBeforeUnload);
+  },
+  beforeUnmount() {
+    // Nettoyer l'écouteur pour éviter des fuites de mémoire
+    window.removeEventListener("beforeunload", this.handleBeforeUnload);
+  },
+  methods: {
+    handleBeforeUnload(event) {
+      // Déconnecter l'utilisateur Firebase avant de fermer la page
+      auth
+        .signOut()
+        .then(() => {
+          console.log("Utilisateur déconnecté automatiquement.");
+        })
+        .catch((error) => {
+          console.error("Erreur lors de la déconnexion :", error);
+        });
+
+      // Optionnel : Ajouter un message d'avertissement pour la fermeture
+      event.preventDefault();
+      event.returnValue = "";
+    },
+  },
+};
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h3 {
   margin: 40px 0 0;
