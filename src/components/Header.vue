@@ -1,6 +1,6 @@
 <template>
   <header class="main-header">
-    <img src="@/assets/logo.png" alt="Logo" class="logo" />
+    <img src="@/assets/logoDessin1.png" alt="Logo" class="logo" />
     <nav>
       <router-link to="/" v-if="!user">Connexion</router-link>
       <router-link to="/profile" v-if="user">Profil</router-link>
