@@ -4,6 +4,7 @@ import AuthExample from '../components/AuthExample.vue';
 import HomePage from '../components/HomePage.vue';
 import AddDevice from '../components/AddDevice.vue';
 import Device from '../components/Device.vue';
+import ProfilPage from '../components/ProfilPage.vue';
 // Définition des routes
 const routes = [
   {
@@ -29,6 +30,12 @@ const routes = [
     component: Device, 
     meta: { requiresAuth: false },
   }, 
+  {
+    path: '/profil',
+    name: 'Profil',
+    component: ProfilPage,
+    meta: { requiresAuth: true },
+  },
 
 
 ];

@@ -1,0 +1,27 @@
+/*code pour le visuel de l'authentification */
+
+.auth-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Prend toute la hauteur de la fenêtre */
+    background-color: #f9f9f9; /* Couleur de fond */
+  }
+  
+  .auth-form {
+    background-color: white; /* Couleur de fond du formulaire */
+    padding: 20px;
+    border-radius: 8px; /* Coins arrondis */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Ombre */
+    width: 300px; /* Largeur fixe pour le formulaire */
+    margin-bottom: 20px; /* Espacement entre les formulaires */
+  }
+  
+  .form-group {
+    margin-bottom: 15px; /* Espacement entre les champs */
+  }
+  
+  .error-message {
+    color: red; /* Couleur du message d'erreur */
+  }
