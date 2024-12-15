@@ -12,7 +12,7 @@ const routes = [
     component: AuthExample, // Page de connexion
   },
   {
-    path: '/home',
+    path: '/home-page',
     name: 'HomePage',
     component: HomePage, // Page d'accueil
     meta: { requiresAuth: false }, // Cette route nécessite pas une authentification

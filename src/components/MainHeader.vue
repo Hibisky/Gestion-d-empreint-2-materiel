@@ -26,10 +26,10 @@
 
 <script>
 import { auth } from '../firebase'; // Importer Firebase
-import { useRouter } from 'vue-router'; // Utiliser useRouter pour naviguer
+//import { useRouter } from 'vue-router'; // Utiliser useRouter pour naviguer
 
 export default {
-  name: 'Header',
+  name: 'main-header',
   data() {
     return {
       user: null, // Stocker l'utilisateur connecté
