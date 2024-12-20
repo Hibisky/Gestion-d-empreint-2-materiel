@@ -14,7 +14,7 @@
     <!-- Boutons à droite -->
     <div class="button-container">
       <router-link to="/formulaire" class="signup-button">S'inscrire</router-link>
-      <router-link to="/login" class="login-button">Connexion</router-link>
+      <router-link to="/Login" class="login-button">Connexion</router-link>
     </div>
   </header>
 </template>
@@ -28,7 +28,7 @@ export default {
 <style scoped>
 .main-header {
   background-color: #F8F8FF;
-  color: #333; /* Texte avec un bon contraste */
+  color: #333;
   padding: 10px 20px;
   display: flex;
   align-items: center;
@@ -53,13 +53,13 @@ export default {
 
 .nav-center a {
   text-decoration: none;
-  color: #007BFF; /* Bleu pour les liens */
+  color: #007BFF;
   font-weight: bold;
   transition: color 0.3s;
 }
 
 .nav-center a:hover {
-  color: #0056b3; /* Couleur au survol */
+  color: #0056b3;
 }
 
 .button-container {
@@ -71,7 +71,7 @@ export default {
 
 .signup-button,
 .login-button {
-  background-color: #007BFF; /* Couleur bleue */
+  background-color: #007BFF;
   color: white;
   text-decoration: none;
   padding: 10px 20px;
@@ -82,6 +82,6 @@ export default {
 
 .signup-button:hover,
 .login-button:hover {
-  background-color: #0056b3; /* Couleur plus sombre au survol */
+  background-color: #0056b3;
 }
 </style>
