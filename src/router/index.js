@@ -5,6 +5,7 @@ import HomePage from '../components/HomePage.vue';
 import AddDevice from '../components/AddDevice.vue';
 import Device from '../components/Device.vue';
 import ProfilPage from '../components/ProfilPage.vue';
+import ReservationPage from '../components/ReservationPage.vue';
 // Définition des routes
 const routes = [
   {
@@ -36,7 +37,11 @@ const routes = [
     component: ProfilPage,
     meta: { requiresAuth: true },
   },
-
+  {
+    path: '/reservation',
+    name: 'Reservation',
+    component: ReservationPage,
+  },
 
 ];
 
