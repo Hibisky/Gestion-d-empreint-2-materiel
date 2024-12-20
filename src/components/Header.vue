@@ -11,9 +11,10 @@
       <router-link to="/help">Aide</router-link>
       <router-link to="/about">À propos</router-link>
     </nav>
-    <!-- Bouton à droite -->
+    <!-- Boutons à droite -->
     <div class="button-container">
-      <router-link to="/signup" class="signup-button">S'inscrire</router-link>
+      <router-link to="/formulaire" class="signup-button">S'inscrire</router-link>
+      <router-link to="/login" class="login-button">Connexion</router-link>
     </div>
   </header>
 </template>
@@ -62,13 +63,15 @@ export default {
 }
 
 .button-container {
-  flex: 1; /* Espace occupé par le bouton à droite */
+  flex: 1; /* Espace occupé par les boutons à droite */
   display: flex;
-  justify-content: flex-end; /* Aligner le bouton à droite */
+  justify-content: flex-end; /* Aligner les boutons à droite */
+  gap: 15px; /* Espacement entre les boutons */
 }
 
-.signup-button {
-  background-color: #007BFF; /* Couleur bleue pour le bouton */
+.signup-button,
+.login-button {
+  background-color: #007BFF; /* Couleur bleue */
   color: white;
   text-decoration: none;
   padding: 10px 20px;
@@ -77,7 +80,8 @@ export default {
   transition: background-color 0.3s;
 }
 
-.signup-button:hover {
+.signup-button:hover,
+.login-button:hover {
   background-color: #0056b3; /* Couleur plus sombre au survol */
 }
 </style>
