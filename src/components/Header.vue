@@ -1,62 +1,41 @@
 <template>
   <header class="main-header">
-    <img src="@/assets/logoDessin1.png" alt="Logo" class="logo" />
-    <nav>
-      <router-link to="/" v-if="!user">Connexion</router-link>
-      <router-link to="/profile" v-if="user">Profil</router-link>
-      <router-link to="/reservation" v-if="user">Réservation</router-link>
-      <router-link to="/home" v-if="user">Accueil</router-link>
-      <router-link to="/add-device" v-if="user">Ajouter un Appareil</router-link>
-      <router-link to="/devices" v-if="user">Appareils Disponibles</router-link>
-
-
-      
-      <!-- Image pour déconnexion -->
-      <img 
-        v-if="user" 
-        src="@/assets/logout.png" 
-        alt="Déconnexion" 
-        class="logout-icon" 
-        @click="logout" 
-      />
+    <!-- Logo à gauche -->
+    <div class="logo-container">
+      <img src="@/assets/logoDessin1.png" alt="Logo" class="logo" />
+    </div>
+    <!-- Liens centrés -->
+    <nav class="nav-center">
+      <router-link to="/home">Accueil</router-link>
+      <router-link to="/faq">FAQ</router-link>
+      <router-link to="/help">Aide</router-link>
+      <router-link to="/about">À propos</router-link>
     </nav>
+    <!-- Bouton à droite -->
+    <div class="button-container">
+      <router-link to="/signup" class="signup-button">S'inscrire</router-link>
+    </div>
   </header>
 </template>
 
 <script>
-import { auth } from '../firebase';
-
 export default {
   name: 'MainHeader',
-  data() {
-    return {
-      user: null,
-    };
-  },
-  mounted() {
-    // Mettre à jour l'état de l'utilisateur en temps réel
-    auth.onAuthStateChanged((currentUser) => {
-      this.user = currentUser;
-    });
-  },
-  methods: {
-    logout() {
-      auth.signOut().then(() => {
-        this.$router.push('/'); // Rediriger vers la page de connexion
-      });
-    },
-  },
 };
 </script>
 
 <style scoped>
 .main-header {
   background-color: #F8F8FF;
-  color: white;
+  color: #333; /* Texte avec un bon contraste */
   padding: 10px 20px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  border-bottom: 2px solid #ddd;
+}
+
+.logo-container {
+  flex: 1; /* Espace occupé par le logo à gauche */
 }
 
 .logo {
@@ -64,20 +43,41 @@ export default {
   height: auto;
 }
 
-nav {
+.nav-center {
+  flex: 2; /* Espace au centre pour la navigation */
   display: flex;
-  gap: 15px;
-  align-items: center;
+  justify-content: center; /* Centrer les liens */
+  gap: 30px; /* Espacement entre les liens */
 }
 
-.logout-icon {
-  width: 30px;
-  height: 30px;
-  cursor: pointer; /* Curseur main sur l'image */
-  transition: opacity 0.3s; /* Animation lors du survol */
+.nav-center a {
+  text-decoration: none;
+  color: #007BFF; /* Bleu pour les liens */
+  font-weight: bold;
+  transition: color 0.3s;
 }
 
-.logout-icon:hover {
-  opacity: 0.8; /* Effet visuel au survol */
+.nav-center a:hover {
+  color: #0056b3; /* Couleur au survol */
+}
+
+.button-container {
+  flex: 1; /* Espace occupé par le bouton à droite */
+  display: flex;
+  justify-content: flex-end; /* Aligner le bouton à droite */
+}
+
+.signup-button {
+  background-color: #007BFF; /* Couleur bleue pour le bouton */
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.signup-button:hover {
+  background-color: #0056b3; /* Couleur plus sombre au survol */
 }
 </style>
