@@ -6,16 +6,6 @@
           <img src="@/assets/images/logoDessin1.png" alt="Logo" class="logo" />
           <p>© 2024 MonApplication. Tous droits réservés.</p>
         </div>
-  
-        <!-- Section des liens de navigation -->
-        <nav class="footer-nav">
-          <router-link to="/home" class="footer-link">Accueil</router-link>
-          <router-link to="/faq" class="footer-link">FAQ</router-link>
-          <router-link to="/help" class="footer-link">Aide</router-link>
-          <router-link to="/about" class="footer-link">À propos</router-link>
-          <router-link to="/contact" class="footer-link">Contact</router-link>
-        </nav>
-  
         <!-- Section des réseaux sociaux -->
         <div class="footer-socials">
           <a href="https://facebook.com" target="_blank" class="social-link" aria-label="Facebook">

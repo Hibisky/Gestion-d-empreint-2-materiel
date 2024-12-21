@@ -1,11 +1,10 @@
 <template>
     <div class="login-page">
-      <header class="header">
-        <h1>LocaMat</h1>
-      </header>
+      <img src="@/assets/images/logoDessin1.png" alt="Logo LocaMat" class="logo" />
+      <img src="@/assets/images/locamat.png" alt="Logo LocaMat" class="logo" />
       <main>
         <div class="login-form">
-          <img src="@/assets/images/locamat.png" alt="Logo LocaMat" class="logo" />
+         
           <form @submit.prevent="handleLogin">
             <div class="form-group">
               <label for="email">Identifiant (Email ou Matricule)</label>
@@ -36,9 +35,6 @@
           <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
         </div>
       </main>
-      <footer class="footer">
-        <p>&copy; 2023-2024 LocaMat - Tous droits réservés.</p>
-      </footer>
     </div>
   </template>
   
