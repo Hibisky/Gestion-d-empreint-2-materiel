@@ -2,7 +2,7 @@
   <div class="hello m'hammed">
     <h1>{{ msg }}</h1>
     <p>coucou </p>
-    <img src="@/assets/vague.png" alt="Logo" class="logo" />
+    <img src="@/assets/images/vague.png" alt="Logo" class="logo" />
     <h1>{{ msg }}</h1>
     <p>
         Home Page a faire 

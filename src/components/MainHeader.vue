@@ -1,6 +1,6 @@
 <template>
   <div class="main-header">
-    <img src="@/assets/locamat.png" alt="Logo" class="logo" />
+    <img src="@/assets/images/locamat.png" alt="Logo" class="logo" />
 
     <div class="header-actions">
       <button @click="goToProfile" v-if="user">Profil</button>

@@ -2,7 +2,7 @@
   <header class="main-header">
     <!-- Logo à gauche -->
     <div class="logo-container">
-      <img src="@/assets/logoDessin1.png" alt="Logo" class="logo" />
+      <img src="@/assets/images/logoDessin1.png" alt="Logo" class="logo" />
     </div>
     <!-- Liens centrés -->
     <nav class="nav-center">

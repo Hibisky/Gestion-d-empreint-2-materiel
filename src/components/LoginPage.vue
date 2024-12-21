@@ -5,7 +5,7 @@
       </header>
       <main>
         <div class="login-form">
-          <img src="@/assets/locamat.png" alt="Logo LocaMat" class="logo" />
+          <img src="@/assets/images/locamat.png" alt="Logo LocaMat" class="logo" />
           <form @submit.prevent="handleLogin">
             <div class="form-group">
               <label for="email">Identifiant (Email ou Matricule)</label>

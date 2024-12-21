@@ -3,7 +3,7 @@
       <div class="footer-container">
         <!-- Section logo et copyright -->
         <div class="footer-logo">
-          <img src="@/assets/logoDessin1.png" alt="Logo" class="logo" />
+          <img src="@/assets/images/logoDessin1.png" alt="Logo" class="logo" />
           <p>© 2024 MonApplication. Tous droits réservés.</p>
         </div>
   
