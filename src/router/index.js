@@ -6,45 +6,25 @@ import AddDevice from '../components/AddDevice.vue';
 import Device from '../components/Device.vue';
 import ProfilPage from '../components/ProfilPage.vue';
 import FAQPage from '../components/FAQPage.vue'; // Import du composant FAQ
+import SubscriptionPage from '../components/SubscriptionPage.vue';
+import AboutPage from '../components/AboutPage.vue';
+import HelpPage from '../components/HelpPage.vue';
 
 // Définition des routes
 const routes = [
-  {
-    path: '/',
-    name: 'auth',
-    component: AuthExample, // Page de connexion
-  },
-  {
-    path: '/home',
-    name: 'HomePage',
-    component: HomePage, // Page d'accueil
-    meta: { requiresAuth: false },
-  },
-  {
-    path: '/faq',
-    name: 'FAQPage',
-    component: FAQPage, // Page FAQ
-    meta: { requiresAuth: false },
-  },
-  { 
-    path: '/add-device', 
-    name: 'AddDevice', 
-    component: AddDevice,
-    meta: { requiresAuth: true },
-  },
-  { 
-    path: '/devices', 
-    name: 'Device', 
-    component: Device, 
-    meta: { requiresAuth: false },
-  }, 
-  {
-    path: '/profil',
-    name: 'Profil',
-    component: ProfilPage,
-    meta: { requiresAuth: true },
-  },
+  { path: '/auth', name: 'auth', component: AuthExample, meta: { showFooter: false } },
+  { path: '/', name: 'HomePage', component: HomePage, meta: { showFooter: true } },
+  { path: '/faq', name: 'FAQPage', component: FAQPage, meta: { showFooter: true } },
+  { path: '/about', name: 'AboutPage', component: AboutPage, meta: { showFooter: true } },
+  { path: '/help', name: 'HelpPage', component: HelpPage, meta: { showFooter: true } },
+  { path: '/add-device', name: 'AddDevice', component: AddDevice, meta: { showFooter: false } },
+  { path: '/devices', name: 'Device', component: Device, meta: { showFooter: true } },
+  { path: '/profil', name: 'Profil', component: ProfilPage, meta: { showFooter: false } },
+  { path: '/subscription', name: 'SubscriptionPage', component: SubscriptionPage, meta: { showFooter: false } },
+  { path: '/formulaire', name: 'Formulaire', component: SubscriptionPage }, // Formulaire d'inscription
+  
 ];
+
 
 // Création du routeur
 const router = createRouter({

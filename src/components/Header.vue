@@ -6,7 +6,7 @@
     </div>
     <!-- Liens centrés -->
     <nav class="nav-center">
-      <router-link to="/home">Accueil</router-link>
+      <router-link to="/">Accueil</router-link>
       <router-link to="/faq">FAQ</router-link>
       <router-link to="/help">Aide</router-link>
       <router-link to="/about">À propos</router-link>
