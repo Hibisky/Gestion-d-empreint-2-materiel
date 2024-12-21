@@ -5,6 +5,8 @@ import HomePage from '../components/HomePage.vue';
 import AddDevice from '../components/AddDevice.vue';
 import Device from '../components/Device.vue';
 import ProfilPage from '../components/ProfilPage.vue';
+import FAQPage from '../components/FAQPage.vue'; // Import du composant FAQ
+
 // Définition des routes
 const routes = [
   {
@@ -16,7 +18,13 @@ const routes = [
     path: '/home',
     name: 'HomePage',
     component: HomePage, // Page d'accueil
-    meta: { requiresAuth: false }, // Cette route nécessite pas une authentification
+    meta: { requiresAuth: false },
+  },
+  {
+    path: '/faq',
+    name: 'FAQPage',
+    component: FAQPage, // Page FAQ
+    meta: { requiresAuth: false },
   },
   { 
     path: '/add-device', 
@@ -36,8 +44,6 @@ const routes = [
     component: ProfilPage,
     meta: { requiresAuth: true },
   },
-
-
 ];
 
 // Création du routeur
