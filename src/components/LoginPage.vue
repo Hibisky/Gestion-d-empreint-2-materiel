@@ -33,9 +33,8 @@
         
         <!-- Liens d'options -->
         <div class="options">
-          <router-link to="/password-reset" class="link">Mot de passe oublié ?</router-link>
+          <router-link to="/auth" class="link">Mot de passe oublié ?</router-link>
         </div>
-
         <!-- Affichage des messages d'erreur -->
         <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
       </div>
@@ -87,6 +86,7 @@ export default {
       return regex.test(password);
     },
     async authenticateUser(email, password) {
+      //PROBLEME TO DO 
       // Simulation d'une base d'utilisateurs (remplacer avec une API réelle)
       const mockUsers = [
         { email: "admin@domain.com", password: "Admin123", role: "admin", active: true },

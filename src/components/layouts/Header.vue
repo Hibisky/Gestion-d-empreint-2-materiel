@@ -8,7 +8,7 @@
     <nav class="nav-center">
       <router-link to="/">Accueil</router-link>
       <router-link to="/faq">FAQ</router-link>
-      <router-link to="/help">Aide</router-link>
+      <router-link to="/help">Support</router-link>
       <router-link to="/about">À propos</router-link>
     </nav>
     <!-- Boutons à droite -->

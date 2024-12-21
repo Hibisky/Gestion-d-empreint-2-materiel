@@ -1,6 +1,6 @@
 <template>
     <div class="help-page">
-      <h1>Aide</h1>
+      <h1>Support</h1>
       <p>
         Vous avez besoin d'aide ? Consultez nos articles pour trouver des réponses ou contactez notre support.
       </p>
