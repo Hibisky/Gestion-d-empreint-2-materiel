@@ -1,17 +1,6 @@
 <template>
   <div class="home-page">
-    <!-- Header (si vous avez un header global, vous pouvez l'inclure ici) -->
-    <header>
-      <!-- Exemple d'inclusion d'un header (si nécessaire) -->
-      <h1>Bienvenue sur notre site</h1>
-    </header>
 
-    <!-- Carrousel -->
-    <div class="carousel">
-      <div v-for="(image, index) in images" :key="index" class="carousel-item">
-        <img :src="image.src" :alt="image.alt" />
-      </div>
-    </div>
 
     <!-- Message principal -->
     <section class="main-info">

@@ -101,5 +101,23 @@
   .social-link img:hover {
     transform: scale(1.1);
   }
+  @media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .footer-nav {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .footer-socials {
+    justify-content: center;
+  }
+}
+
   </style>
   
