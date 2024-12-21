@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { auth } from "../firebase"; // Importez Firebase depuis votre fichier firebase.js
+import { auth } from "../../router/firebase"; // Importez Firebase depuis votre fichier firebase.js
 
 export default {
   name: "HomePage",

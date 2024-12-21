@@ -56,7 +56,7 @@
 import { ref, watch } from 'vue';
 import '../assets/styles/style.css';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail } from 'firebase/auth';
-import { auth } from '../firebase.js';
+import { auth } from '../router/firebase.js';
 import { useRouter } from 'vue-router';
 
 export default {

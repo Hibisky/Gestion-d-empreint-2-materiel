@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { auth } from '../firebase'; // Importer Firebase
+import { auth } from '../router/firebase'; // Importer Firebase
 //import { useRouter } from 'vue-router'; // Utiliser useRouter pour naviguer
 
 export default {

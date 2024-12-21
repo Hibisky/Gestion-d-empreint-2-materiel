@@ -1,14 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { auth } from '../firebase'; // Import Firebase auth
+import { auth } from '../router/firebase';
 import AuthExample from '../components/AuthExample.vue';
-import HomePage from '../components/HomePage.vue';
+import HomePage from '../components/pages/HomePage.vue';
 import AddDevice from '../components/AddDevice.vue';
 import Device from '../components/Device.vue';
-import ProfilPage from '../components/ProfilPage.vue';
-import FAQPage from '../components/FAQPage.vue'; // Import du composant FAQ
-import SubscriptionPage from '../components/SubscriptionPage.vue';
-import AboutPage from '../components/AboutPage.vue';
-import HelpPage from '../components/HelpPage.vue';
+import ProfilPage from '../components/pages/ProfilPage.vue';
+import FAQPage from '../components/pages/FAQPage.vue'; // Import du composant FAQ
+import SubscriptionPage from '../components/pages/SubscriptionPage.vue';
+import AboutPage from '../components/pages/AboutPage.vue';
+import HelpPage from '../components/pages/HelpPage.vue';
 
 // Définition des routes
 const routes = [
