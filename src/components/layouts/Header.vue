@@ -7,7 +7,7 @@
 
     <!-- Liens centrés -->
     <nav class="nav-center">
-      <router-link to="/">Accueil</router-link>
+      <router-link to="/ ">Accueil</router-link>
       <router-link to="/faq">FAQ</router-link>
       <router-link to="/help">Support</router-link>
       <router-link to="/about">À propos</router-link>
@@ -82,6 +82,10 @@ export default {
   height: auto;
 }
 
+.logout-icon {
+  width: 60px;
+  height: auto;
+}
 .nav-center {
   flex: 2; /* Espace au centre pour la navigation */
   display: flex;
