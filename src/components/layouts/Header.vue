@@ -2,21 +2,40 @@
   <header class="main-header">
     <!-- Logo à gauche -->
     <div class="logo-container">
-      <img src="@/assets/images/logoDessin1.png" alt="Logo" class="logo" />
+      <img :src="require('@/assets/images/logoDessin1.png')" alt="Logo" class="logo" />
     </div>
+
     <!-- Liens centrés -->
     <nav class="nav-center">
       <router-link to="/">Accueil</router-link>
       <router-link to="/faq">FAQ</router-link>
       <router-link to="/help">Support</router-link>
       <router-link to="/about">À propos</router-link>
+
+      <!-- Liens spécifiques à l'utilisateur connecté -->
+      <router-link v-if="user" to="/profile">Profil</router-link>
+      <router-link v-if="user" to="/reservation">Réservation</router-link>
+      <router-link v-if="user" to="/add-device">Ajouter un Appareil</router-link>
+      <router-link v-if="user" to="/devices">Appareils Disponibles</router-link>
+
+      <!-- Image pour déconnexion -->
+      <img 
+        v-if="user" 
+        :src="require('@/assets/images/logout.png')" 
+        alt="Déconnexion" 
+        class="logout-icon" 
+        @click="logout" 
+      />
     </nav>
-    <!-- Boutons à droite -->
-    <div class="button-container">
+
+    <!-- Boutons à droite pour les non-connectés -->
+    <div class="button-container" v-if="!user">
       <router-link to="/auth" class="login-button">Connexion</router-link>
     </div>
   </header>
 </template>
+
+
 
 <script>
 export default {
