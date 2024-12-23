@@ -48,9 +48,10 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import {
   signInWithEmailAndPassword,
-  onAuthStateChanged,
+  onAuthStateChanged
 } from 'firebase/auth';
-import { auth } from '@/router/firebase.js'; // Chemin correct pour votre fichier Firebase
+import { getFirestore, doc, getDoc } from 'firebase/firestore'; // Correct imports
+import { auth } from '@/router/firebase.js'; // Assurez-vous d'importer votre instance d'auth Firebase
 
 export default {
   name: 'LoginPage',
@@ -64,8 +65,26 @@ export default {
     const login = async () => {
       errorMessage.value = ''; // Réinitialiser le message d'erreur
       try {
-        await signInWithEmailAndPassword(auth, email.value, password.value);
-        router.push({ name: 'HomePage' }); // Redirection après connexion réussie
+        const userCredential = await signInWithEmailAndPassword(auth, email.value, password.value);
+        const user = userCredential.user;
+
+        // Initialiser Firestore et récupérer le rôle de l'utilisateur
+        const db = getFirestore(); // Initialiser Firestore
+        const userDocRef = doc(db, 'users', user.uid);
+        const userDoc = await getDoc(userDocRef);
+
+        if (userDoc.exists()) {
+          const userRole = userDoc.data().role; // Récupérer le rôle de l'utilisateur
+          
+          // Redirection en fonction du rôle
+          if (userRole === 'admin') {
+            router.push({ name: 'Dashboard' });
+          } else {
+            router.push({ name: 'Devices' });
+          }
+        } else {
+          errorMessage.value = "Utilisateur non trouvé dans la base de données.";
+        }
       } catch (error) {
         if (error.code === 'auth/user-not-found') {
           errorMessage.value = "Utilisateur introuvable. Veuillez vérifier l'email.";
@@ -78,9 +97,21 @@ export default {
     };
 
     // Observer l'état de l'utilisateur
-    onAuthStateChanged(auth, (currentUser) => {
+    onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
-        router.push({ name: 'HomePage' }); // Rediriger si l'utilisateur est connecté
+        // Si l'utilisateur est connecté, vérifier son rôle
+        const db = getFirestore(); // Initialiser Firestore
+        const userDocRef = doc(db, 'users', currentUser.uid);
+        const userDoc = await getDoc(userDocRef);
+        
+        if (userDoc.exists()) {
+          const userRole = userDoc.data().role;
+          if (userRole === 'admin') {
+            router.push({ name: 'Dashboard' });
+          } else {
+            router.push({ name: 'Devices' });
+          }
+        }
       }
     });
 
@@ -95,6 +126,7 @@ export default {
 </script>
 
 <style scoped>
+
 .login-page {
   display: flex;
   flex-direction: column;

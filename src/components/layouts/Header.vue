@@ -53,12 +53,16 @@ export default {
     // Mettre à jour l'état de l'utilisateur en temps réel
     auth.onAuthStateChanged((currentUser) => {
       this.user = currentUser;
+      if (this.user) {
+        // Si l'utilisateur est connecté, rediriger vers la page des appareils
+        this.$router.push('/devices');
+      }
     });
   },
   methods: {
     logout() {
       auth.signOut().then(() => {
-        this.$router.push('/'); // Rediriger vers la page d'accueil
+        this.$router.push('/'); // Rediriger vers la page d'accueil après déconnexion
       });
     },
   },
