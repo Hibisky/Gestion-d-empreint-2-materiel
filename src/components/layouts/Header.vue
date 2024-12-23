@@ -7,35 +7,37 @@
 
     <!-- Liens centrés -->
     <nav class="nav-center">
-      <router-link v-if="!user" to="/ ">Accueil</router-link>
+      <!-- Liens pour les non-connectés -->
+      <router-link v-if="!user" to="/">Accueil</router-link>
       <router-link v-if="!user" to="/faq">FAQ</router-link>
       <router-link v-if="!user" to="/help">Support</router-link>
       <router-link v-if="!user" to="/about">À propos</router-link>
 
-      <!-- Liens spécifiques à l'utilisateur connecté -->
+      <!-- Liens pour les utilisateurs connectés -->
       <router-link v-if="user" to="/profile">Profil</router-link>
       <router-link v-if="user" to="/reservation">Réservation</router-link>
       <router-link v-if="user" to="/add-device">Ajouter un Appareil</router-link>
       <router-link v-if="user" to="/devices">Appareils Disponibles</router-link>
-
-      <!-- Image pour déconnexion -->
-      <img 
-        v-if="user" 
-        :src="require('@/assets/images/logout.png')" 
-        alt="Déconnexion" 
-        class="logout-icon" 
-        @click="logout" 
-      />
     </nav>
 
-    <!-- Boutons à droite pour les non-connectés -->
-    <div class="button-container" v-if="!user">
-      <router-link to="/auth" class="login-button">Connexion</router-link>
+    <!-- Déconnexion ou boutons de connexion -->
+    <div class="right-container">
+      <!-- Image de déconnexion -->
+      <img
+        v-if="user"
+        :src="require('@/assets/images/logout.png')"
+        alt="Déconnexion"
+        class="logout-icon"
+        @click="logout"
+      />
+
+      <!-- Boutons pour les non-connectés -->
+      <div v-if="!user">
+        <router-link to="/auth" class="login-button">Connexion</router-link>
+      </div>
     </div>
   </header>
 </template>
-
-
 
 <script>
 import { auth } from '../../router/firebase';
@@ -56,7 +58,7 @@ export default {
   methods: {
     logout() {
       auth.signOut().then(() => {
-        this.$router.push('/'); // Rediriger vers la page de connexion
+        this.$router.push('/'); // Rediriger vers la page d'accueil
       });
     },
   },
@@ -70,6 +72,7 @@ export default {
   padding: 10px 20px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   border-bottom: 2px solid #ddd;
 }
 
@@ -82,10 +85,6 @@ export default {
   height: auto;
 }
 
-.logout-icon {
-  width: 60px;
-  height: auto;
-}
 .nav-center {
   flex: 2; /* Espace au centre pour la navigation */
   display: flex;
@@ -104,14 +103,19 @@ export default {
   color: #0056b3;
 }
 
-.button-container {
-  flex: 1; /* Espace occupé par les boutons à droite */
+.right-container {
+  flex: 1; /* Espace pour la zone à droite */
   display: flex;
-  justify-content: flex-end; /* Aligner les boutons à droite */
-  gap: 15px; /* Espacement entre les boutons */
+  justify-content: flex-end; /* Placer les éléments à droite */
+  align-items: center;
 }
 
-.signup-button,
+.logout-icon {
+  width: 60px;
+  height: auto;
+  cursor: pointer;
+}
+
 .login-button {
   background-color: #007BFF;
   color: white;
@@ -122,7 +126,6 @@ export default {
   transition: background-color 0.3s;
 }
 
-.signup-button:hover,
 .login-button:hover {
   background-color: #0056b3;
 }
