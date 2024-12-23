@@ -13,7 +13,6 @@
     </nav>
     <!-- Boutons à droite -->
     <div class="button-container">
-      <router-link to="/formulaire" class="signup-button">S'inscrire</router-link>
       <router-link to="/auth" class="login-button">Connexion</router-link>
     </div>
   </header>
