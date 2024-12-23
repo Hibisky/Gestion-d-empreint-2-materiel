@@ -14,7 +14,7 @@
       <router-link v-if="!user" to="/about">À propos</router-link>
 
       <!-- Liens pour les utilisateurs connectés -->
-      <router-link v-if="user" to="/profile">Profil</router-link>
+      <router-link v-if="user" to="/profil">Profil</router-link>
       <router-link v-if="user" to="/reservation">Réservation</router-link>
       <router-link v-if="user" to="/add-device">Ajouter un Appareil</router-link>
       <router-link v-if="user" to="/devices">Appareils Disponibles</router-link>

@@ -10,6 +10,7 @@ import FAQPage from '../components/pages/FAQPage.vue'; // Import du composant FA
 import SubscriptionPage from '../components/pages/SubscriptionPage.vue';
 import AboutPage from '../components/pages/AboutPage.vue';
 import HelpPage from '../components/pages/HelpPage.vue';
+import ResaPage from '../components/pages/ReservationPage.vue';
 
 // Définition des routes
 const routes = [
@@ -23,6 +24,7 @@ const routes = [
   { path: '/profil', name: 'Profil', component: ProfilPage, meta: { showFooter: false } },
   { path: '/subscription', name: 'SubscriptionPage', component: SubscriptionPage, meta: { showFooter: false } },
   { path: '/formulaire', name: 'Formulaire', component: SubscriptionPage }, // Formulaire d'inscription
+  { path: '/reservation', name: 'ReservationPage', component: ResaPage }, // Formulaire d'inscription
   
 ];
 
