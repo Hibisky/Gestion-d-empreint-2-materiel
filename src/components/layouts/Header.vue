@@ -38,8 +38,28 @@
 
 
 <script>
+import { auth } from '../../router/firebase';
+
 export default {
   name: 'MainHeader',
+  data() {
+    return {
+      user: null,
+    };
+  },
+  mounted() {
+    // Mettre à jour l'état de l'utilisateur en temps réel
+    auth.onAuthStateChanged((currentUser) => {
+      this.user = currentUser;
+    });
+  },
+  methods: {
+    logout() {
+      auth.signOut().then(() => {
+        this.$router.push('/'); // Rediriger vers la page de connexion
+      });
+    },
+  },
 };
 </script>
 
