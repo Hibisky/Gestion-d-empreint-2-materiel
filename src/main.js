@@ -4,7 +4,8 @@ import router from './router';
 //Import librairie bulma
 import 'bulma/css/bulma.css'
 
-import { db, auth } from './firebase.js'; //import firebase
+import { db, auth } from './router/firebase.js'; //import firebase
+
 
 const app = createApp(App);
 

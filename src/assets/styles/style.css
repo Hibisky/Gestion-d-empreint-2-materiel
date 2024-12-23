@@ -25,3 +25,27 @@
   .error-message {
     color: red; /* Couleur du message d'erreur */
   }
+
+  .hello {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .logo {
+    width: 400px;
+    height: auto;
+    margin-top: 20px;
+  }
+  
+  .carousel {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+  }
+  
+  .carousel-item img {
+    max-width: 100%;
+    border-radius: 10px;
+  }
+  
