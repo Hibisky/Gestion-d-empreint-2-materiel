@@ -7,10 +7,10 @@
 
     <!-- Liens centrés -->
     <nav class="nav-center">
-      <router-link to="/ ">Accueil</router-link>
-      <router-link to="/faq">FAQ</router-link>
-      <router-link to="/help">Support</router-link>
-      <router-link to="/about">À propos</router-link>
+      <router-link v-if="!user" to="/ ">Accueil</router-link>
+      <router-link v-if="!user" to="/faq">FAQ</router-link>
+      <router-link v-if="!user" to="/help">Support</router-link>
+      <router-link v-if="!user" to="/about">À propos</router-link>
 
       <!-- Liens spécifiques à l'utilisateur connecté -->
       <router-link v-if="user" to="/profile">Profil</router-link>
