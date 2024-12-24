@@ -4,7 +4,7 @@
       <!-- Brand and Slogan -->
       <div class="footer-brand">
         <h2>Informatics Rentals</h2>
-        <p>Your trusted source for renting IT equipment.</p>
+        <p>Your reliable partner for IT equipment rentals. Fast, efficient, and affordable solutions.</p>
       </div>
 
       <!-- Navigation Links -->
@@ -21,9 +21,28 @@
       <!-- Contact Information -->
       <div class="footer-contact">
         <h3>Contact Us</h3>
-        <p>Email: <a href="mailto:info@informaticsrentals.com">info@informaticsrentals.com</a></p>
-        <p>Phone: <a href="tel:+1234567890">+1 234 567 890</a></p>
-        <p>Location: 123 Tech Avenue, Silicon City</p>
+        <p><strong>Email:</strong> <a href="mailto:info@informaticsrentals.com">info@informaticsrentals.com</a></p>
+        <p><strong>Phone:</strong> <a href="tel:+1234567890">+1 234 567 890</a></p>
+        <p><strong>Location:</strong> 123 Tech Avenue, Silicon City</p>
+      </div>
+
+      <!-- Social Media Links -->
+      <div class="footer-social">
+        <h3>Follow Us</h3>
+        <div class="social-icons">
+          <a href="#" target="_blank" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" target="_blank" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" target="_blank" aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="#" target="_blank" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
       </div>
     </div>
 
@@ -42,12 +61,13 @@ export default {
 
 <style scoped>
 .footer {
-  background-color: #1c1c1c;
-  color: #f5f5f5;
+  background-color: #0b3d91; /* Deep blue */
+  color: #ffffff;
   padding: 40px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: 'Arial', sans-serif;
 }
 
 .footer-container {
@@ -67,7 +87,7 @@ export default {
 .footer-brand h2 {
   font-size: 1.8em;
   margin-bottom: 10px;
-  color: #42b983;
+  color: #50c8ff; /* Light blue */
 }
 
 .footer-brand p {
@@ -77,15 +97,18 @@ export default {
 }
 
 .footer-links,
-.footer-contact {
+.footer-contact,
+.footer-social {
   flex: 1;
   min-width: 200px;
 }
 
 .footer-links h3,
-.footer-contact h3 {
+.footer-contact h3,
+.footer-social h3 {
   font-size: 1.2em;
   margin-bottom: 10px;
+  color: #50c8ff;
 }
 
 .footer-links ul {
@@ -98,13 +121,13 @@ export default {
 }
 
 .footer-links a {
-  color: #42b983;
+  color: #ffffff;
   text-decoration: none;
   transition: color 0.3s;
 }
 
 .footer-links a:hover {
-  color: #88c7a9;
+  color: #50c8ff;
 }
 
 .footer-contact p {
@@ -112,7 +135,7 @@ export default {
 }
 
 .footer-contact a {
-  color: #42b983;
+  color: #ffffff;
   text-decoration: none;
 }
 
@@ -120,9 +143,24 @@ export default {
   text-decoration: underline;
 }
 
+.footer-social .social-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.footer-social a {
+  color: #ffffff;
+  font-size: 1.5em;
+  transition: color 0.3s;
+}
+
+.footer-social a:hover {
+  color: #50c8ff;
+}
+
 .footer-bottom {
   text-align: center;
-  border-top: 1px solid #333;
+  border-top: 1px solid #50c8ff;
   padding-top: 10px;
   font-size: 0.9em;
   width: 100%;
