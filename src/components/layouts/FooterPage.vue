@@ -1,40 +1,35 @@
 <template>
-  <footer class="main-footer">
+  <footer class="footer">
     <div class="footer-container">
-      <!-- Section logo and copyright -->
-      <div class="footer-logo">
-        <img src="@/assets/images/logoDessin1.png" alt="Logo" class="logo" />
-        <p>© 2024 MonApplication. Tous droits réservés.</p>
+      <!-- Brand and Slogan -->
+      <div class="footer-brand">
+        <h2>Informatics Rentals</h2>
+        <p>Your trusted source for renting IT equipment.</p>
       </div>
 
-      <!-- Navigation links -->
-      <nav class="footer-nav">
-        <a href="/" class="footer-link">Accueil</a>
-        <a href="/about" class="footer-link">À propos</a>
-        <a href="/contact" class="footer-link">Contact</a>
-        <a href="/privacy" class="footer-link">Politique de confidentialité</a>
-      </nav>
+      <!-- Navigation Links -->
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><router-link to="/">Home</router-link></li>
+          <li><router-link to="/about">About Us</router-link></li>
+          <li><router-link to="/services">Services</router-link></li>
+          <li><router-link to="/contact">Contact</router-link></li>
+        </ul>
+      </div>
 
-      <!-- Social media icons -->
-      <div class="footer-socials">
-        <a href="https://facebook.com" target="_blank" class="social-link" aria-label="Facebook">
-          <img src="@/assets/images/fb.png" alt="Facebook" />
-        </a>
-        <a href="https://twitter.com" target="_blank" class="social-link" aria-label="Twitter">
-          <img src="@/assets/images/twitter.png" alt="Twitter" />
-        </a>
-        <a href="https://tiktok.com" target="_blank" class="social-link" aria-label="TikTok">
-          <img src="@/assets/images/tiktok.png" alt="LinkedIn" />
-        </a>
-        <a href="https://instagram.com" target="_blank" class="social-link" aria-label="Instagram">
-          <img src="@/assets/images/instagram.png" alt="Instagram" />
-        </a>
+      <!-- Contact Information -->
+      <div class="footer-contact">
+        <h3>Contact Us</h3>
+        <p>Email: <a href="mailto:info@informaticsrentals.com">info@informaticsrentals.com</a></p>
+        <p>Phone: <a href="tel:+1234567890">+1 234 567 890</a></p>
+        <p>Location: 123 Tech Avenue, Silicon City</p>
       </div>
     </div>
 
-    <!-- Decorative bottom bar -->
-    <div class="footer-bar">
-      <p>Made with ❤️ by MonApplication Team</p>
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+      <p>© 2024 Informatics Rentals - All rights reserved.</p>
     </div>
   </footer>
 </template>
@@ -47,9 +42,89 @@ export default {
 
 <style scoped>
 .footer {
+  background-color: #1c1c1c;
+  color: #f5f5f5;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.footer-brand {
+  flex: 1;
+  min-width: 250px;
+}
+
+.footer-brand h2 {
+  font-size: 1.8em;
+  margin-bottom: 10px;
+  color: #42b983;
+}
+
+.footer-brand p {
+  font-size: 1em;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.footer-links,
+.footer-contact {
+  flex: 1;
+  min-width: 200px;
+}
+
+.footer-links h3,
+.footer-contact h3 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 8px;
+}
+
+.footer-links a {
+  color: #42b983;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: #88c7a9;
+}
+
+.footer-contact p {
+  margin: 5px 0;
+}
+
+.footer-contact a {
+  color: #42b983;
+  text-decoration: none;
+}
+
+.footer-contact a:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
   text-align: center;
-  background-color: #333;
-  color: white;
-  padding: 20px;
+  border-top: 1px solid #333;
+  padding-top: 10px;
+  font-size: 0.9em;
+  width: 100%;
 }
 </style>
