@@ -2,10 +2,12 @@
   <div id="app">
     <!-- Le header global -->
     <MainHeader />
+
     <!-- Le composant qui affichera la vue selon la route active -->
     <router-view />
+
     <!-- Afficher le footer uniquement si la route ne l'exclut pas -->
-    <FooterPage v-if="$route.meta.showFooter" />
+    <FooterPage />
   </div>
 </template>
 
@@ -34,7 +36,7 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -67,4 +69,21 @@ router-link {
 router-link:hover {
   text-decoration: underline;
 }
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures the app takes up the full viewport height */
+}
+
+router-view {
+  flex: 1; /* Allows the main content to grow and push the footer down */
+}
+
+footer {
+  text-align: center;
+  background-color: #333;
+  color: white;
+  padding: 20px;
+}
+
 </style>

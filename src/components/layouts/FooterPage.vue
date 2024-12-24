@@ -1,5 +1,5 @@
 <template>
-  <footer-page class="main-footer">
+  <footer class="main-footer">
     <div class="footer-container">
       <!-- Section logo and copyright -->
       <div class="footer-logo">
@@ -36,101 +36,20 @@
     <div class="footer-bar">
       <p>Made with ❤️ by MonApplication Team</p>
     </div>
-  </footer-page>
+  </footer>
 </template>
 
 <script>
 export default {
-  name: "FooterPage",
+  name: 'FooterPage',
 };
 </script>
 
 <style scoped>
-.main-footer {
-  background-color: #1a1a1a;
-  color: #f5f5f5;
-  padding: 30px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-top: 3px solid #3498db;
-}
-
-.footer-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  max-width: 1200px;
-  width: 100%;
-  gap: 20px;
-}
-
-.footer-logo {
+.footer {
   text-align: center;
-}
-
-.logo {
-  width: 70px;
-  height: auto;
-  margin-bottom: 10px;
-}
-
-.footer-nav {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.footer-link {
-  color: #f5f5f5;
-  text-decoration: none;
-  font-size: 14px;
-  transition: color 0.3s;
-}
-
-.footer-link:hover {
-  color: #3498db;
-}
-
-.footer-socials {
-  display: flex;
-  gap: 15px;
-}
-
-.social-link img {
-  width: 30px;
-  height: 30px;
-  transition: transform 0.3s, filter 0.3s;
-}
-
-.social-link img:hover {
-  transform: scale(1.2);
-  filter: brightness(1.2);
-}
-
-.footer-bar {
-  margin-top: 20px;
-  text-align: center;
-  font-size: 12px;
-  color: #aaa;
-}
-
-@media (max-width: 768px) {
-  .footer-container {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .footer-nav {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .footer-socials {
-    justify-content: center;
-  }
+  background-color: #333;
+  color: white;
+  padding: 20px;
 }
 </style>

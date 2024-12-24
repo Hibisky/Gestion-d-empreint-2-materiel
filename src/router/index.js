@@ -19,12 +19,13 @@ const routes = [
   { path: '/faq', name: 'FAQPage', component: FAQPage, meta: { showFooter: true } },
   { path: '/about', name: 'AboutPage', component: AboutPage, meta: { showFooter: true } },
   { path: '/help', name: 'HelpPage', component: HelpPage, meta: { showFooter: true } },
+
   { path: '/add-device', name: 'AddDevice', component: AddDevice, meta: { showFooter: false } },
   { path: '/devices', name: 'Device', component: Device, meta: { showFooter: true } },
   { path: '/profil', name: 'Profil', component: ProfilPage, meta: { showFooter: false } },
   { path: '/subscription', name: 'SubscriptionPage', component: SubscriptionPage, meta: { showFooter: false } },
-  { path: '/formulaire', name: 'Formulaire', component: SubscriptionPage }, // Formulaire d'inscription
-  { path: '/reservation', name: 'ReservationPage', component: ResaPage }, // Formulaire d'inscription
+  { path: '/formulaire', name: 'Formulaire', component: SubscriptionPage , meta: { showFooter: false }}, // Formulaire d'inscription
+  { path: '/reservation', name: 'ReservationPage', component: ResaPage , meta: { showFooter: false }}, // Formulaire d'inscription
   
 ];
 
