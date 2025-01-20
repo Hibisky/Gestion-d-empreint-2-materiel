@@ -21,12 +21,10 @@ nav {
 
 <script>
 import { defineComponent } from 'vue';
-<<<<<<< HEAD
 import MainHeader from '@/components/layouts/Header.vue'; // Importez le composant Header
 //import MainHeader from '@/components/MainHeader.vue';
-=======
-import MainHeader from '@/components/MainHeader.vue'; // Importez le composant Header
->>>>>>> f7e3f53205de42590346b836cb03ba938238e1d4
+
+//import MainHeader from '@/components/MainHeader.vue'; // Importez le composant Header
 
 export default defineComponent({
   name: 'App',
