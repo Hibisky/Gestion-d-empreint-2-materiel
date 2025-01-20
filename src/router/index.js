@@ -16,6 +16,7 @@ import HelpPage from '../components/pages/HelpPage.vue';
 
 // Définition des routes
 const routes = [
+<<<<<<< HEAD
   { path: '/auth', name: 'auth', component: LoginPage, meta: { showFooter: true } },
   { path: '/', name: 'HomePage', component: HomePage, meta: { showFooter: true } },
   { path: '/faq', name: 'FAQPage', component: FAQPage, meta: { showFooter: true } },
@@ -30,6 +31,33 @@ const routes = [
   { path: '/subscription', name: 'SubscriptionPage', component: SubscriptionPage, meta: { showFooter: false } },
   { path: '/formulaire', name: 'Formulaire', component: SubscriptionPage }, // Formulaire d'inscription
   
+=======
+  {
+    path: '/',
+    name: 'auth',
+    component: AuthExample, // Page de connexion
+  },
+  {
+    path: '/home-page',
+    name: 'HomePage',
+    component: HomePage, // Page d'accueil
+    meta: { requiresAuth: false }, // Cette route nécessite pas une authentification
+  },
+  { 
+    path: '/add-device', 
+    name: 'AddDevice', 
+    component: AddDevice,
+    meta: { requiresAuth: true },
+  },
+  { 
+    path: '/devices', 
+    name: 'Device', 
+    component: Device, 
+    meta: { requiresAuth: false },
+  }, 
+
+
+>>>>>>> f7e3f53205de42590346b836cb03ba938238e1d4
 ];
 
 
