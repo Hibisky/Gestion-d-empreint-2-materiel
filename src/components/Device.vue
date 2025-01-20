@@ -57,16 +57,58 @@
           <p>Quantité : {{ device.quantity }}</p>
           <p>Description : {{ device.description }}</p>
           <button class="button is-primary" @click="goToReservation(device.id)">Réserver</button>
+          <button class="button is-info" @click="openEditModal(device)">Modifier</button>
+          <button class="button is-danger" @click="deleteDevice(device.id)">Supprimer</button>
         </div>
       </div>
     </div>
-    <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
+
+    <!-- Modal de modification -->
+    <div class="modal" :class="{ 'is-active': isEditModalOpen }">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Modifier Appareil</p>
+          <button class="delete" aria-label="close" @click="closeEditModal"></button>
+        </header>
+        <section class="modal-card-body">
+          <div class="field">
+            <label class="label">Nom</label>
+            <div class="control">
+              <input class="input" type="text" v-model="editForm.name" />
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Description</label>
+            <div class="control">
+              <textarea class="textarea" v-model="editForm.description"></textarea>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Quantité</label>
+            <div class="control">
+              <input class="input" type="number" v-model="editForm.quantity" />
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Image (URL)</label>
+            <div class="control">
+              <input class="input" type="text" v-model="editForm.image" />
+            </div>
+          </div>
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button is-success" @click="updateDevice">Enregistrer</button>
+          <button class="button" @click="closeEditModal">Annuler</button>
+        </footer>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { db } from "../router/firebase" // Importer Firestore
-import { collection, getDocs } from 'firebase/firestore'; // Fonctions Firestore
+import { db } from "../router/firebase"; // Import Firestore
+import { collection, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
 
 export default {
   name: "DeviceList",
@@ -79,6 +121,14 @@ export default {
       searchQuery: "",
       startDate: "",
       endDate: "",
+      isEditModalOpen: false,
+      editForm: {
+        id: "",
+        name: "",
+        description: "",
+        quantity: 0,
+        image: "",
+      },
     };
   },
   computed: {
@@ -87,8 +137,12 @@ export default {
         const matchesSearch =
           this.searchQuery === "" ||
           device.name.toLowerCase().includes(this.searchQuery.toLowerCase());
+
+        const hasEnoughQuantity = device.quantity > 0;
+
         const isAvailable = this.isDeviceAvailable(device);
-        return matchesSearch && isAvailable;
+
+        return matchesSearch && hasEnoughQuantity && isAvailable;
       });
     },
   },
@@ -120,7 +174,8 @@ export default {
       }
     },
     isDeviceAvailable(device) {
-      if (!this.startDate || !this.endDate) return true;
+      if (!this.startDate || !this.endDate) return device.quantity > 0;
+
       const overlappingReservations = this.reservations.filter(
         (reservation) =>
           reservation.materialId === device.id &&
@@ -129,16 +184,54 @@ export default {
             new Date(reservation.startDate) > new Date(this.endDate)
           )
       );
-      return overlappingReservations.length === 0;
+
+      // Calculer la quantité disponible en fonction des réservations
+      const reservedCount = overlappingReservations.length;
+      const availableQuantity = device.quantity - reservedCount;
+
+      return availableQuantity > 0;
     },
-    filterDevices() {},
+    openEditModal(device) {
+      this.isEditModalOpen = true;
+      this.editForm = { ...device };
+    },
+    closeEditModal() {
+      this.isEditModalOpen = false;
+    },
+    async updateDevice() {
+      try {
+        const deviceRef = doc(db, "devices", this.editForm.id);
+        await updateDoc(deviceRef, {
+          name: this.editForm.name,
+          description: this.editForm.description,
+          quantity: this.editForm.quantity,
+          image: this.editForm.image,
+        });
+        alert("Appareil mis à jour avec succès !");
+        this.closeEditModal();
+        this.fetchDevices();
+      } catch (error) {
+        console.error("Erreur lors de la mise à jour de l'appareil :", error);
+      }
+    },
+    async deleteDevice(deviceId) {
+      if (confirm("Êtes-vous sûr de vouloir supprimer cet appareil ?")) {
+        try {
+          await deleteDoc(doc(db, "devices", deviceId));
+          alert("Appareil supprimé avec succès !");
+          this.fetchDevices();
+        } catch (error) {
+          console.error("Erreur lors de la suppression de l'appareil :", error);
+        }
+      }
+    },
+    goToReservation(deviceId) {
+      this.$router.push({ name: "Reservation", query: { deviceId } });
+    },
     resetFilters() {
       this.searchQuery = "";
       this.startDate = "";
       this.endDate = "";
-    },
-    goToReservation(deviceId) {
-      this.$router.push({ name: "Reservation", query: { deviceId } });
     },
   },
   async mounted() {
@@ -147,6 +240,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+/* Styles identiques */
+</style>
+
 
 <style scoped>
 .device-list {
