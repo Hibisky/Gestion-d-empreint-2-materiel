@@ -39,6 +39,7 @@
           <!-- Message d'erreur -->
           <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
         </div>
+        <button type="submit" class="btn-full">Create Account</button>
       </main>
     </div>
   </template>
