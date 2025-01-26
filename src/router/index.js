@@ -8,6 +8,7 @@ import Device from '../components/pages/Device.vue';
 import ReservationPage from '../components/pages/ReservationPage.vue';
 import MyReservations from '../components/pages/MyReservations.vue';
 import AllReservations from "../components/pages/AllReservations.vue";
+import AdminManageUsers from '@/components/pages/AdminManageUsers.vue';
 import ProfilPage from '../components/pages/ProfilPage.vue';
 import FAQPage from '../components/pages/FAQPage.vue'; // Import du composant FAQ
 import SubscriptionPage from '../components/pages/SubscriptionPage.vue';
@@ -26,6 +27,7 @@ const routes = [
   { path: '/devices', name: 'Device', component: Device, meta: { showFooter: true } },
   { path: '/reservation', name: 'Reservation', component: ReservationPage, meta: { showFooter: false } },
   { path: '/my-reservations', name: 'MyReservations', component: MyReservations, meta: { showFooter: false } },
+  { path: '/manage-users', name: 'AdminManageUsers', component: AdminManageUsers, meta: { showFooter: false } },
   { path: "/all-reservations", name: "AllReservations", component: AllReservations },
   { path: '/profil', name: 'Profil', component: ProfilPage, meta: { showFooter: false } },
   { path: '/subscription', name: 'SubscriptionPage', component: SubscriptionPage, meta: { showFooter: false } },

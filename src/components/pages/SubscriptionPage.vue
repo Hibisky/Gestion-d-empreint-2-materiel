@@ -159,6 +159,7 @@ export default {
           phone: phone.value,
           zipCode: zipCode.value,
           city: city.value,
+          role: "user",
           createdAt: new Date(),
         });
 
