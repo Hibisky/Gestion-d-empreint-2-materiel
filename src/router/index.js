@@ -1,13 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { auth } from '../router/firebase';
 //import AuthExample from '../components/AuthExample.vue';
-import LoginPage from '../components/LoginPage.vue';
+import LoginPage from '../components/pages/LoginPage.vue';
 import HomePage from '../components/pages/HomePage.vue';
-import AddDevice from '../components/AddDevice.vue';
-import Device from '../components/Device.vue';
-import ReservationPage from '../components/ReservationPage.vue';
-import MyReservations from '../components/MyReservations.vue';
-import AllReservations from "../components/AllReservations.vue";
+import AddDevice from '../components/pages/AddDevice.vue';
+import Device from '../components/pages/Device.vue';
+import ReservationPage from '../components/pages/ReservationPage.vue';
+import MyReservations from '../components/pages/MyReservations.vue';
+import AllReservations from "../components/pages/AllReservations.vue";
 import ProfilPage from '../components/pages/ProfilPage.vue';
 import FAQPage from '../components/pages/FAQPage.vue'; // Import du composant FAQ
 import SubscriptionPage from '../components/pages/SubscriptionPage.vue';

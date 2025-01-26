@@ -107,7 +107,7 @@
 </template>
 
 <script>
-import { db } from "../router/firebase"; // Import Firestore
+import { db } from "../../router/firebase"; // Import Firestore
 import { collection, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
 
 export default {

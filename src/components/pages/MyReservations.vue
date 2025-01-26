@@ -90,7 +90,7 @@
 <script>
 import { ref, onMounted } from "vue";
 import { collection, getDocs, doc, updateDoc, deleteDoc, getDoc } from "firebase/firestore";
-import { db, auth } from "../router/firebase";
+import { db, auth } from "../../router/firebase";
 
 export default {
   name: "MyReservations",

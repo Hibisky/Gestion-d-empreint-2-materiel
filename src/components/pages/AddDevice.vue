@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { db } from '../router/firebase'; // Assurez-vous que votre fichier firebase.js exporte `db`
+import { db } from '../../router/firebase'; // Assurez-vous que votre fichier firebase.js exporte `db`
 import { addDoc, collection } from 'firebase/firestore'; // Importez les fonctions Firestore
 
 export default {
