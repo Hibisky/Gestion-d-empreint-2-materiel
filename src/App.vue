@@ -24,6 +24,8 @@ import { defineComponent } from 'vue';
 import MainHeader from '@/components/layouts/Header.vue'; // Importez le composant Header
 //import MainHeader from '@/components/MainHeader.vue';
 
+//import MainHeader from '@/components/MainHeader.vue'; // Importez le composant Header
+
 export default defineComponent({
   name: 'App',
   components: {
@@ -42,7 +44,7 @@ export default defineComponent({
   margin-top: 0px;
 }
 
-header {
+header-side {
   font-size: 16px;
   text-align: left;
   padding: 10px;
@@ -50,7 +52,7 @@ header {
   color: white;
 }
 
-nav {
+nav-side {
   display: flex;
   justify-content: center;
   gap: 20px;

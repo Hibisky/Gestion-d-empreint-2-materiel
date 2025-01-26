@@ -10,6 +10,7 @@
       <router-link to="/faq">FAQ</router-link>
       <router-link to="/help">Aide</router-link>
       <router-link to="/about">À propos</router-link>
+
     </nav>
     <!-- Boutons à droite -->
     <div class="button-container">
