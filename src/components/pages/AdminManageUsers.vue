@@ -53,184 +53,210 @@
       </div>
     </div>
   </template>
-<script>
-import { ref, onMounted } from "vue";
-import {
-  collection,
-  getDocs,
-  updateDoc,
-  deleteDoc,
-  doc,
-} from "firebase/firestore";
-import { auth, db } from "@/router/firebase";
-import { reauthenticateWithCredential, EmailAuthProvider } from "firebase/auth";
-
-export default {
-  name: "AdminManageUsers",
-  setup() {
-    const users = ref([]);
-    const showConfirmationModal = ref(false);
-    const adminPassword = ref(""); // Mot de passe de l'utilisateur connecté
-    const errorMessage = ref("");
-    const userToUpdate = ref(null);
-    const currentUserUid = ref(""); // UID de l'utilisateur connecté
-
-    // Charger les utilisateurs depuis Firestore
-    const fetchUsers = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, "users"));
-        const allUsers = querySnapshot.docs.map((doc) => ({
-          uid: doc.id,
-          ...doc.data(),
-        }));
-
-        // Exclure le compte générique (par email ou un champ `protected`)
-        users.value = allUsers.filter(
-          (user) => user.email !== "generic@example.com" && !user.protected
-        );
-
-        // Récupérer l'utilisateur actuellement connecté
-        const currentUser = auth.currentUser;
-        if (currentUser) {
-          currentUserUid.value = currentUser.uid;
+  
+  <script>
+  import { ref, onMounted } from "vue";
+  import {
+    collection,
+    getDocs,
+    updateDoc,
+    deleteDoc,
+    doc,
+  } from "firebase/firestore";
+  import { auth, db } from "@/router/firebase";
+  import { reauthenticateWithCredential, EmailAuthProvider } from "firebase/auth";
+  
+  export default {
+    name: "AdminManageUsers",
+    setup() {
+      const users = ref([]);
+      const showConfirmationModal = ref(false);
+      const adminPassword = ref(""); // Mot de passe de l'utilisateur connecté
+      const errorMessage = ref("");
+      const userToUpdate = ref(null);
+      const currentUserUid = ref(""); // UID de l'utilisateur connecté
+  
+      // Charger les utilisateurs depuis Firestore
+      const fetchUsers = async () => {
+        try {
+          const querySnapshot = await getDocs(collection(db, "users"));
+          const firestoreUsers = querySnapshot.docs.map((doc) => ({
+            uid: doc.id,
+            ...doc.data(),
+          }));
+  
+          // Vérifier la synchronisation avec Firebase Auth
+          const authUsers = await fetch("http://localhost:3001/api/get-users").then((res) =>
+            res.json()
+          );
+          const authUserIds = authUsers.map((user) => user.uid);
+  
+          // Supprimer les utilisateurs inexistants dans Firebase Auth
+          for (const user of firestoreUsers) {
+            if (!authUserIds.includes(user.uid)) {
+              const userRef = doc(db, "users", user.uid);
+              await deleteDoc(userRef);
+            }
+          }
+  
+          // Mettre à jour la liste des utilisateurs visibles
+          users.value = firestoreUsers.filter(
+            (user) => authUserIds.includes(user.uid) && user.email !== "generic@example.com"
+          );
+  
+          // Récupérer l'utilisateur connecté
+          const currentUser = auth.currentUser;
+          if (currentUser) {
+            currentUserUid.value = currentUser.uid;
+          }
+        } catch (error) {
+          console.error("Erreur lors de la récupération des utilisateurs :", error);
         }
-      } catch (error) {
-        console.error("Erreur lors du chargement des utilisateurs :", error);
-      }
-    };
-
-    // Enregistrer un rôle avec double authentification
-    const saveRole = (user) => {
-      userToUpdate.value = user;
-      showConfirmationModal.value = true;
-    };
-
-    const confirmRoleUpdate = async () => {
-      try {
-        // Vérifier le mot de passe de l'utilisateur connecté
-        const currentUser = auth.currentUser;
-        const credential = EmailAuthProvider.credential(
-          currentUser.email,
-          adminPassword.value
-        );
-        await reauthenticateWithCredential(currentUser, credential);
-
-        // Mettre à jour le rôle dans Firestore
-        const userRef = doc(db, "users", userToUpdate.value.uid);
-        await updateDoc(userRef, { role: userToUpdate.value.role });
-
-        alert("Rôle mis à jour avec succès !");
+      };
+  
+      // Enregistrer un rôle avec double authentification
+      const saveRole = (user) => {
+        userToUpdate.value = user;
+        showConfirmationModal.value = true;
+      };
+  
+      const confirmRoleUpdate = async () => {
+        try {
+          // Authentification par mot de passe
+          const currentUser = auth.currentUser;
+          const credential = EmailAuthProvider.credential(
+            currentUser.email,
+            adminPassword.value
+          );
+          await reauthenticateWithCredential(currentUser, credential);
+  
+          // Mettre à jour le rôle dans Firestore
+          const userRef = doc(db, "users", userToUpdate.value.uid);
+          await updateDoc(userRef, { role: userToUpdate.value.role });
+  
+          alert("Rôle mis à jour avec succès !");
+          showConfirmationModal.value = false;
+          adminPassword.value = "";
+          userToUpdate.value = null;
+          fetchUsers();
+        } catch (error) {
+          console.error("Erreur lors de la mise à jour du rôle :", error);
+          if (error.code === "auth/wrong-password") {
+            errorMessage.value = "Mot de passe incorrect.";
+          } else {
+            errorMessage.value = "Une erreur est survenue.";
+          }
+        }
+      };
+  
+      const cancelRoleUpdate = () => {
         showConfirmationModal.value = false;
         adminPassword.value = "";
         userToUpdate.value = null;
+        errorMessage.value = "";
+      };
+  
+      // Supprimer un utilisateur
+      const deleteUser = async (uid) => {
+        if (uid === currentUserUid.value) {
+          alert("Vous ne pouvez pas supprimer votre propre compte.");
+          return;
+        }
+  
+        if (confirm("Êtes-vous sûr de vouloir supprimer cet utilisateur ?")) {
+          try {
+            // Supprimer de Firebase Auth via backend
+            await fetch("http://localhost:3001/api/delete-user", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ uid }),
+            });
+  
+            // Supprimer de Firestore
+            const userRef = doc(db, "users", uid);
+            await deleteDoc(userRef);
+  
+            alert("Utilisateur supprimé !");
+            users.value = users.value.filter((u) => u.uid !== uid);
+          } catch (error) {
+            console.error("Erreur lors de la suppression :", error);
+            alert("Une erreur est survenue lors de la suppression.");
+          }
+        }
+      };
+  
+      onMounted(() => {
         fetchUsers();
-      } catch (error) {
-        console.error("Erreur lors de la confirmation :", error);
-        if (error.code === "auth/wrong-password") {
-          errorMessage.value = "Mot de passe incorrect.";
-        } else {
-          errorMessage.value = "Une erreur est survenue.";
-        }
-      }
-    };
-
-    const cancelRoleUpdate = () => {
-      showConfirmationModal.value = false;
-      adminPassword.value = "";
-      userToUpdate.value = null;
-      errorMessage.value = "";
-    };
-
-    // Supprimer un utilisateur (empêcher la suppression du compte connecté ou générique)
-    const deleteUser = async (uid) => {
-      if (uid === currentUserUid.value) {
-        alert("Vous ne pouvez pas supprimer votre propre compte.");
-        return;
-      }
-
-      if (confirm("Êtes-vous sûr de vouloir supprimer cet utilisateur ?")) {
-        try {
-          const userRef = doc(db, "users", uid);
-          await deleteDoc(userRef);
-          alert("Utilisateur supprimé !");
-          users.value = users.value.filter((u) => u.uid !== uid);
-        } catch (error) {
-          console.error("Erreur lors de la suppression :", error);
-        }
-      }
-    };
-
-    onMounted(() => {
-      fetchUsers();
-    });
-
-    return {
-      users,
-      showConfirmationModal,
-      adminPassword,
-      errorMessage,
-      saveRole,
-      confirmRoleUpdate,
-      cancelRoleUpdate,
-      deleteUser,
-    };
-  },
-};
-</script>
-<style scoped>
-.manage-users {
-  padding: 20px;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-th,
-td {
-  border: 1px solid #ccc;
-  padding: 10px;
-  text-align: left;
-}
-
-select {
-  padding: 5px;
-}
-
-button {
-  background-color: #007bff;
-  color: white;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-.confirmation-modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  text-align: center;
-}
-
-.modal-actions {
-  margin-top: 15px;
-}
-
-.error-message {
-  color: red;
-  margin-top: 10px;
-}
-</style>
+      });
+  
+      return {
+        users,
+        showConfirmationModal,
+        adminPassword,
+        errorMessage,
+        saveRole,
+        confirmRoleUpdate,
+        cancelRoleUpdate,
+        deleteUser,
+      };
+    },
+  };
+  </script>
+  
+  <style scoped>
+  .manage-users {
+    padding: 20px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th,
+  td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  select {
+    padding: 5px;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .confirmation-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .modal-actions {
+    margin-top: 15px;
+  }
+  
+  .error-message {
+    color: red;
+    margin-top: 10px;
+  }
+  </style>
   
