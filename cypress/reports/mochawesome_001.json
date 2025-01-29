@@ -1,0 +1,148 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 2,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-01-10T18:20:56.900Z",
+    "end": "2025-01-10T18:21:04.760Z",
+    "duration": 7860,
+    "testsRegistered": 3,
+    "passPercent": 66.66666666666666,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "1f249da9-b70d-4d80-ba40-a6d0a9ad6635",
+      "title": "",
+      "fullFile": "cypress/e2e/home.cy.js",
+      "file": "cypress/e2e/home.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "d66ee78e-459a-43fb-be43-a70c8909ebfb",
+          "title": "Test de la page d'accueil",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "devrait charger la page d'accueil correctement",
+              "fullTitle": "Test de la page d'accueil devrait charger la page d'accueil correctement",
+              "timedOut": null,
+              "duration": 513,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('http://localhost:8080');\ncy.get('.main-header').should('exist');\ncy.get('.logo').should('exist');\ncy.get('.nav-center').should('exist');",
+              "err": {},
+              "uuid": "b8f45e9c-838a-4069-85b3-bec7b89aa3f4",
+              "parentUUID": "d66ee78e-459a-43fb-be43-a70c8909ebfb",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "devrait pouvoir naviguer vers le formulaire d'ajout",
+              "fullTitle": "Test de la page d'accueil devrait pouvoir naviguer vers le formulaire d'ajout",
+              "timedOut": null,
+              "duration": 1825,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.login();\ncy.get('.nav-center a').contains('Ajouter un Appareil').click();\ncy.url().should('include', '/add-device');",
+              "err": {},
+              "uuid": "c5af7c6f-733b-4c3e-9c19-16eb6f1db701",
+              "parentUUID": "d66ee78e-459a-43fb-be43-a70c8909ebfb",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "devrait pouvoir ajouter un nouvel appareil",
+              "fullTitle": "Test de la page d'accueil devrait pouvoir ajouter un nouvel appareil",
+              "timedOut": null,
+              "duration": 4726,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.login();\ncy.get('.nav-center a').contains('Ajouter un Appareil').click();\n// Remplir le formulaire\ncy.get('input[name=\"name\"]').type('Appareil Test');\ncy.get('input[name=\"quantity\"]').type('1');\ncy.get('input[name=\"description\"]').type('Description test');\ncy.get('input[name=\"imageUrl\"]').type('https://example.com/image.jpg');\n// Soumettre le formulaire\ncy.contains('button', 'Ajouter').click();\n// Vérifier qu'on est redirigé vers la liste des appareils\ncy.url().should('include', '/devices');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `input[type=\"password\"]`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `input[type=\"password\"]`, but never found it.\n    at Context.eval (webpack://test_securite/./cypress/support/commands.js:17:5)",
+                "diff": null
+              },
+              "uuid": "8ad7afb3-a566-4a04-9d19-0ebcef217a83",
+              "parentUUID": "d66ee78e-459a-43fb-be43-a70c8909ebfb",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "b8f45e9c-838a-4069-85b3-bec7b89aa3f4",
+            "c5af7c6f-733b-4c3e-9c19-16eb6f1db701"
+          ],
+          "failures": [
+            "8ad7afb3-a566-4a04-9d19-0ebcef217a83"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 7064,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
