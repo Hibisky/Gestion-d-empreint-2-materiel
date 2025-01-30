@@ -5,44 +5,44 @@
       <img :src="require('@/assets/images/logoDessin1.png')" alt="Logo" class="logo" />
     </div>
 
-    <!-- Liens centrés -->
+    <!-- Menu de navigation -->
     <nav class="nav-center">
       <!-- Liens pour les non-connectés -->
-      <router-link v-if="!user" to="/">Accueil</router-link>
-      <router-link v-if="!user" to="/faq">FAQ</router-link>
-      <router-link v-if="!user" to="/help">Support</router-link>
-      <router-link v-if="!user" to="/about">À propos</router-link>
+      <router-link v-if="!user" to="/" class="navbar-item">Accueil</router-link>
+      <router-link v-if="!user" to="/faq" class="navbar-item">FAQ</router-link>
+      <router-link v-if="!user" to="/help" class="navbar-item">Support</router-link>
+      <router-link v-if="!user" to="/about" class="navbar-item">À propos</router-link>
+      <router-link v-if="!user" to="/devices" class="navbar-item">Appareils Disponibles</router-link>
 
       <!-- Liens pour les utilisateurs connectés -->
-      <router-link v-if="user" to="/profile">Profil</router-link>
-      <router-link v-if="user" to="/my-reservations">Mes Réservations</router-link>
-      <router-link v-if="user" to="/add-device">Ajouter un Appareil</router-link>
-      <router-link v-if="user" to="/devices">Appareils Disponibles</router-link>
-      <router-link v-if="user" to="/all-reservations">Toutes les Réservations</router-link>
-      <router-link v-if="user" to="/manage-users">Gestion des utilisateurs</router-link>
+      <router-link v-if="user" to="/profile" class="navbar-item">Profil</router-link>
+      <router-link v-if="user" to="/my-reservations" class="navbar-item">Mes Réservations</router-link>
+      <router-link v-if="user" to="/add-device" class="navbar-item">Ajouter un Appareil</router-link>
+      <router-link v-if="user" to="/devices" class="navbar-item">Appareils Disponibles</router-link>
+      <router-link v-if="user" to="/all-reservations" class="navbar-item">Toutes les Réservations</router-link>
+      <router-link v-if="user" to="/manage-users" class="navbar-item">Gestion des utilisateurs</router-link>
     </nav>
 
-    <!-- Déconnexion ou boutons de connexion -->
+    <!-- Boutons de connexion ou déconnexion -->
     <div class="right-container">
-      <!-- Image de déconnexion -->
-      <img
-        v-if="user"
-        :src="require('@/assets/images/logout.png')"
-        alt="Déconnexion"
-        class="logout-icon"
-        @click="logout"
-      />
+      <!-- Déconnexion -->
+      <button v-if="user" class="button is-danger" @click="logout">
+        <span class="icon">
+          <i class="fas fa-sign-out-alt"></i>
+        </span>
+        <span>Déconnexion</span>
+      </button>
 
-      <!-- Boutons pour les non-connectés -->
-      <div v-if="!user">
-        <router-link to="/auth" class="login-button">Connexion</router-link>
-      </div>
+      <!-- Connexion -->
+      <router-link v-if="!user" to="/auth" class="button is-primary">
+        Connexion
+      </router-link>
     </div>
   </header>
 </template>
 
 <script>
-import { auth } from '../../router/firebase';
+import { auth } from '@/router/firebase';
 
 export default {
   name: 'MainHeader',
@@ -56,7 +56,7 @@ export default {
     auth.onAuthStateChanged((currentUser) => {
       this.user = currentUser;
       if (this.user) {
-        // Si l'utilisateur est connecté, rediriger vers la page des appareils
+        // Rediriger vers la page des appareils si l'utilisateur est connecté
         this.$router.push('/devices');
       }
     });
@@ -73,7 +73,7 @@ export default {
 
 <style scoped>
 .main-header {
-  background-color: #F8F8FF;
+  background-color: #f8f9fa;
   color: #333;
   padding: 10px 20px;
   display: flex;
@@ -83,7 +83,7 @@ export default {
 }
 
 .logo-container {
-  flex: 1; /* Espace occupé par le logo à gauche */
+  flex: 1;
 }
 
 .logo {
@@ -92,47 +92,40 @@ export default {
 }
 
 .nav-center {
-  flex: 2; /* Espace au centre pour la navigation */
   display: flex;
-  justify-content: center; /* Centrer les liens */
-  gap: 30px; /* Espacement entre les liens */
+  gap: 20px;
 }
 
-.nav-center a {
-  text-decoration: none;
-  color: #007BFF;
+.navbar-item {
+  color: #007bff;
   font-weight: bold;
   transition: color 0.3s;
 }
 
-.nav-center a:hover {
+.navbar-item:hover {
   color: #0056b3;
 }
 
 .right-container {
-  flex: 1; /* Espace pour la zone à droite */
   display: flex;
-  justify-content: flex-end; /* Placer les éléments à droite */
   align-items: center;
+  gap: 10px;
 }
 
-.logout-icon {
-  width: 60px;
-  height: auto;
-  cursor: pointer;
-}
-
-.login-button {
-  background-color: #007BFF;
-  color: white;
-  text-decoration: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+.button {
   font-weight: bold;
   transition: background-color 0.3s;
 }
 
-.login-button:hover {
+.button.is-primary:hover {
   background-color: #0056b3;
+}
+
+.button.is-danger:hover {
+  background-color: #d9534f;
+}
+
+button .icon {
+  margin-right: 5px;
 }
 </style>

@@ -1,332 +1,243 @@
 <template>
-  <div class="device-list">
-    <h1 class="title has-text-centered">Liste des Appareils Disponibles</h1>
+  <section class="section">
+    <div class="container">
+      <h1 class="title has-text-centered">Liste des Matériels</h1>
 
-    <!-- Formulaire de filtres compact -->
-    <div class="box filters-container">
-      <form @submit.prevent="filterDevices" class="filters-form">
-        <div class="field">
-          <label class="label is-sr-only">Recherche</label>
-          <div class="control">
-            <input
-              class="input"
-              type="text"
-              v-model="searchQuery"
-              placeholder="Rechercher"
-            />
+      <!-- Formulaire de filtres -->
+      <div class="box filters-container">
+        <form @submit.prevent="filterDevices" class="filters-form">
+          <div class="field">
+            <label class="label is-sr-only">Recherche</label>
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                v-model="searchQuery"
+                placeholder="Rechercher"
+              />
+            </div>
           </div>
-        </div>
 
-        <div class="field">
-          <label class="label is-sr-only">Date de début</label>
-          <div class="control">
-            <input class="input" type="date" v-model="startDate" />
+          <div class="field">
+            <label class="label is-sr-only">Date de début</label>
+            <div class="control">
+              <input class="input" type="date" v-model="startDate" />
+            </div>
           </div>
-        </div>
 
-        <div class="field">
-          <label class="label is-sr-only">Date de fin</label>
-          <div class="control">
-            <input class="input" type="date" v-model="endDate" />
+          <div class="field">
+            <label class="label is-sr-only">Date de fin</label>
+            <div class="control">
+              <input class="input" type="date" v-model="endDate" />
+            </div>
           </div>
-        </div>
 
-        <div class="field">
-          <div class="control">
-            <button class="button is-primary" type="submit">Filtrer</button>
+          <div class="field">
+            <div class="control">
+              <button class="button is-primary" type="submit">Filtrer</button>
+            </div>
           </div>
-        </div>
 
-        <div class="field">
-          <div class="control">
-            <button class="button is-light" type="button" @click="resetFilters">
-              Réinitialiser
-            </button>
+          <div class="field">
+            <div class="control">
+              <button class="button is-light" type="button" @click="resetFilters">
+                Réinitialiser
+              </button>
+            </div>
           </div>
-        </div>
-      </form>
-    </div>
+        </form>
+      </div>
 
-    <!-- Liste des appareils -->
-    <div v-if="loading" class="loading">Chargement des appareils...</div>
-    <div v-else>
-      <div class="devices-grid">
-        <div v-for="device in filteredDevices" :key="device.id" class="device-item">
-          <img :src="device.image" alt="Image de l'appareil" class="device-image" v-if="device.image" />
-          <h3>{{ device.name }}</h3>
-          <p>Quantité : {{ device.quantity }}</p>
-          <p>Description : {{ device.description }}</p>
-          <button class="button is-primary" @click="goToReservation(device.id)">Réserver</button>
-          <button class="button is-info" @click="openEditModal(device)">Modifier</button>
-          <button class="button is-danger" @click="deleteDevice(device.id)">Supprimer</button>
+      <!-- Liste des matériels -->
+      <div v-if="loading" class="loading">Chargement des matériels...</div>
+      <div v-else>
+        <div class="columns is-multiline is-centered">
+          <div v-for="device in filteredDevices" :key="device.id" class="column is-one-third">
+            <div class="box">
+              <!-- Image centrée -->
+              <figure class="image is-128x128 is-centered mx-auto">
+                <img :src="device.image" alt="Image du matériel" v-if="device.image" />
+              </figure>
+
+              <h2 class="title is-4 has-text-centered">{{ device.name }}</h2>
+              <p class="has-text-centered">
+                <strong>Quantité disponible :</strong> {{ device.quantity }}
+              </p>
+
+              <!-- Boutons Modifier / Supprimer visibles uniquement pour l'admin -->
+              <div v-if="isAuthenticated && isAdmin" class="buttons is-centered mt-3">
+                <button class="button is-warning" @click="editDevice(device.id)">Modifier</button>
+                <button class="button is-danger" @click="deleteDevice(device.id)">Supprimer</button>
+              </div>
+
+              <!-- Bouton de réservation -->
+              <div class="has-text-centered mt-2">
+                <button class="button is-primary" @click="reserveDevice(device.id)">
+                  Réserver
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-
-    <!-- Modal de modification -->
-    <div class="modal" :class="{ 'is-active': isEditModalOpen }">
-      <div class="modal-background"></div>
-      <div class="modal-card">
-        <header class="modal-card-head">
-          <p class="modal-card-title">Modifier Appareil</p>
-          <button class="delete" aria-label="close" @click="closeEditModal"></button>
-        </header>
-        <section class="modal-card-body">
-          <div class="field">
-            <label class="label">Nom</label>
-            <div class="control">
-              <input class="input" type="text" v-model="editForm.name" />
-            </div>
-          </div>
-          <div class="field">
-            <label class="label">Description</label>
-            <div class="control">
-              <textarea class="textarea" v-model="editForm.description"></textarea>
-            </div>
-          </div>
-          <div class="field">
-            <label class="label">Quantité</label>
-            <div class="control">
-              <input class="input" type="number" v-model="editForm.quantity" />
-            </div>
-          </div>
-          <div class="field">
-            <label class="label">Image (URL)</label>
-            <div class="control">
-              <input class="input" type="text" v-model="editForm.image" />
-            </div>
-          </div>
-        </section>
-        <footer class="modal-card-foot">
-          <button class="button is-success" @click="updateDevice">Enregistrer</button>
-          <button class="button" @click="closeEditModal">Annuler</button>
-        </footer>
-      </div>
-    </div>
-  </div>
+  </section>
 </template>
 
 <script>
-import { db } from "../../router/firebase"; // Import Firestore
-import { collection, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { ref, onMounted } from "vue";
+import { collection, getDocs, deleteDoc, doc, getDoc } from "firebase/firestore";
+import { db, auth } from "../../router/firebase";
+import { useRouter } from "vue-router";
 
 export default {
-  name: "DeviceList",
-  data() {
-    return {
-      devices: [],
-      reservations: [],
-      loading: true,
-      errorMessage: "",
-      searchQuery: "",
-      startDate: "",
-      endDate: "",
-      isEditModalOpen: false,
-      editForm: {
-        id: "",
-        name: "",
-        description: "",
-        quantity: 0,
-        image: "",
-      },
-    };
-  },
-  computed: {
-    filteredDevices() {
-      return this.devices.filter((device) => {
-        const matchesSearch =
-          this.searchQuery === "" ||
-          device.name.toLowerCase().includes(this.searchQuery.toLowerCase());
+  name: "DevicePage",
+  setup() {
+    const devices = ref([]);
+    const filteredDevices = ref([]);
+    const isAdmin = ref(false);
+    const isAuthenticated = ref(false);
+    const searchQuery = ref("");
+    const startDate = ref("");
+    const endDate = ref("");
+    const router = useRouter();
 
-        const hasEnoughQuantity = device.quantity > 0;
-
-        const isAvailable = this.isDeviceAvailable(device);
-
-        return matchesSearch && hasEnoughQuantity && isAvailable;
-      });
-    },
-  },
-  methods: {
-    async fetchDevices() {
-      try {
-        const querySnapshot = await getDocs(collection(db, "devices"));
-        this.devices = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-      } catch (error) {
-        this.errorMessage =
-          "Erreur lors de la récupération des appareils : " + error.message;
-      } finally {
-        this.loading = false;
-      }
-    },
-    async fetchReservations() {
-      try {
-        const querySnapshot = await getDocs(collection(db, "reservations"));
-        this.reservations = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-      } catch (error) {
-        this.errorMessage =
-          "Erreur lors de la récupération des réservations : " + error.message;
-      }
-    },
-    isDeviceAvailable(device) {
-      if (!this.startDate || !this.endDate) return device.quantity > 0;
-
-      const overlappingReservations = this.reservations.filter(
-        (reservation) =>
-          reservation.materialId === device.id &&
-          !(
-            new Date(reservation.endDate) < new Date(this.startDate) ||
-            new Date(reservation.startDate) > new Date(this.endDate)
-          )
-      );
-
-      // Calculer la quantité disponible en fonction des réservations
-      const reservedCount = overlappingReservations.length;
-      const availableQuantity = device.quantity - reservedCount;
-
-      return availableQuantity > 0;
-    },
-    openEditModal(device) {
-      this.isEditModalOpen = true;
-      this.editForm = { ...device };
-    },
-    closeEditModal() {
-      this.isEditModalOpen = false;
-    },
-    async updateDevice() {
-      try {
-        const deviceRef = doc(db, "devices", this.editForm.id);
-        await updateDoc(deviceRef, {
-          name: this.editForm.name,
-          description: this.editForm.description,
-          quantity: this.editForm.quantity,
-          image: this.editForm.image,
-        });
-        alert("Appareil mis à jour avec succès !");
-        this.closeEditModal();
-        this.fetchDevices();
-      } catch (error) {
-        console.error("Erreur lors de la mise à jour de l'appareil :", error);
-      }
-    },
-    async deleteDevice(deviceId) {
-      if (confirm("Êtes-vous sûr de vouloir supprimer cet appareil ?")) {
-        try {
-          await deleteDoc(doc(db, "devices", deviceId));
-          alert("Appareil supprimé avec succès !");
-          this.fetchDevices();
-        } catch (error) {
-          console.error("Erreur lors de la suppression de l'appareil :", error);
+    // Vérification de l'utilisateur et du rôle admin en temps réel
+    const checkUserRole = async (user) => {
+      if (user) {
+        isAuthenticated.value = true;
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+        if (userDoc.exists() && userDoc.data().role === "admin") {
+          isAdmin.value = true;
+        } else {
+          isAdmin.value = false;
         }
+      } else {
+        isAuthenticated.value = false;
+        isAdmin.value = false;
       }
-    },
-    goToReservation(deviceId) {
-      this.$router.push({ name: "Reservation", query: { deviceId } });
-    },
-    resetFilters() {
-      this.searchQuery = "";
-      this.startDate = "";
-      this.endDate = "";
-    },
-  },
-  async mounted() {
-    await Promise.all([this.fetchDevices(), this.fetchReservations()]);
-    this.loading = false;
+    };
+
+    // Écoute les changements d'authentification Firebase
+    onMounted(() => {
+      auth.onAuthStateChanged(async (user) => {
+        await checkUserRole(user);
+      });
+      fetchDevices();
+    });
+
+    // Récupérer la liste des matériels
+    const fetchDevices = async () => {
+      const querySnapshot = await getDocs(collection(db, "devices"));
+      devices.value = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      filteredDevices.value = devices.value; // Initialisation des appareils
+    };
+
+    // Appliquer les filtres sur les appareils
+    const filterDevices = () => {
+      filteredDevices.value = devices.value.filter((device) => {
+        const matchesSearch =
+          searchQuery.value === "" ||
+          device.name.toLowerCase().includes(searchQuery.value.toLowerCase());
+
+        const matchesStartDate = !startDate.value || new Date(device.date) >= new Date(startDate.value);
+        const matchesEndDate = !endDate.value || new Date(device.date) <= new Date(endDate.value);
+
+        return matchesSearch && matchesStartDate && matchesEndDate;
+      });
+    };
+
+    // Réinitialiser les filtres
+    const resetFilters = () => {
+      searchQuery.value = "";
+      startDate.value = "";
+      endDate.value = "";
+      filteredDevices.value = devices.value; // Réinitialisation
+    };
+
+    // Supprimer un matériel (admin uniquement)
+    const deleteDevice = async (deviceId) => {
+      if (!confirm("Voulez-vous vraiment supprimer ce matériel ?")) return;
+      try {
+        await deleteDoc(doc(db, "devices", deviceId));
+        alert("Matériel supprimé avec succès !");
+        fetchDevices();
+      } catch (error) {
+        console.error("Erreur lors de la suppression :", error);
+        alert("Impossible de supprimer le matériel.");
+      }
+    };
+
+    // Rediriger vers la page de modification (admin uniquement)
+    const editDevice = (deviceId) => {
+      router.push(`/edit-device?deviceId=${deviceId}`);
+    };
+
+    // Rediriger vers la page de réservation
+    const reserveDevice = (deviceId) => {
+      router.push(`/reservation?deviceId=${deviceId}`);
+    };
+
+    return {
+      devices,
+      filteredDevices,
+      searchQuery,
+      startDate,
+      endDate,
+      isAdmin,
+      isAuthenticated,
+      deleteDevice,
+      editDevice,
+      reserveDevice,
+      filterDevices,
+      resetFilters,
+    };
   },
 };
 </script>
 
 <style scoped>
-/* Styles identiques */
-</style>
-
-
-<style scoped>
-.device-list {
-  padding: 20px;
-}
-
-.title {
-  margin-bottom: 20px;
-}
-
-/* Conteneur des filtres centré */
+/* Style pour le formulaire de filtres et la liste des appareils */
 .filters-container {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
 }
 
-/* Filtres en ligne */
 .filters-form {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-/* Largeur des champs de formulaire */
 .input {
   width: auto;
   max-width: 150px;
 }
 
-/* Grille pour appareils : 3 par ligne */
-.devices-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 appareils par ligne */
-  gap: 20px;
-  margin-top: 20px;
+.columns {
+  display: flex;
+  justify-content: center;
 }
 
-.device-item {
-  padding: 15px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  background-color: #ffffff;
+.box {
+  padding: 1.5rem;
   text-align: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
 }
 
-.device-item:hover {
-  transform: scale(1.02);
+.image img {
+  max-width: 100px;
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto;
 }
 
-.device-item h3 {
-  margin: 10px 0;
-  color: #42b983;
-}
-
-.device-item p {
-  margin: 5px 0;
-  color: #333;
-}
-
-.device-image {
-  width: 150px;
-  height: auto;
-  border-radius: 5px;
-  margin-bottom: 10px;
-}
-
-.button {
-  margin-top: 10px;
-}
-
-.loading {
-  text-align: center;
-  font-size: 18px;
-  color: #555;
-}
-
-.error {
-  text-align: center;
-  color: red;
-  font-size: 16px;
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 </style>

@@ -184,6 +184,13 @@ export default {
     };
 
     onMounted(() => {
+      const user = auth.currentUser;
+      if (!user) {
+        alert("Veuillez vous connecter pour effectuer une réservation.");
+        router.push({ name: 'auth' });// Redirige vers la page de connexion
+        return;
+      }
+
       fetchEquipmentAndReservations();
     });
 
