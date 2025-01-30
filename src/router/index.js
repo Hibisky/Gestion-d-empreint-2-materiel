@@ -15,6 +15,7 @@ import FAQPage from '../components/pages/FAQPage.vue'; // Import du composant FA
 import SubscriptionPage from '../components/pages/SubscriptionPage.vue';
 import AboutPage from '../components/pages/AboutPage.vue';
 import HelpPage from '../components/pages/HelpPage.vue';
+import MainProfile from '@/components/pages/MainProfile.vue'; 
 
 // Définition des routes
 const routes = [
@@ -46,7 +47,7 @@ const routes = [
     path: '/add-device', 
     name: 'AddDevice', 
     component: AddDevice,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: true, },
   },
   { 
     path: '/devices', 
@@ -54,6 +55,11 @@ const routes = [
     component: Device, 
     meta: { requiresAuth: false },
   }, 
+  {
+    path: '/profile',
+    name: 'MainProfile', 
+    component: MainProfile,
+  },
 ];
 
 

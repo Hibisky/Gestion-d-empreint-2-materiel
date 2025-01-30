@@ -110,12 +110,12 @@
 ---
 
 ### Script : Gestion de l'inscription et Firebase
-```javascript
+javascript
 <script>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { addDoc, collection } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 import { auth, db } from "@/router/firebase"; // Assurez-vous que Firebase est configuré correctement
 
 export default {
@@ -150,18 +150,19 @@ export default {
         );
         const user = userCredential.user;
 
-        // Enregistrement des informations supplémentaires dans Firestore
-        await addDoc(collection(db, "users"), {
-          uid: user.uid,
-          email: email.value,
-          firstName: firstName.value,
-          lastName: lastName.value,
-          phone: phone.value,
-          zipCode: zipCode.value,
-          city: city.value,
-          role: "user",
-          createdAt: new Date(),
-        });
+        
+
+await setDoc(doc(db, "users", user.uid), {
+  email: email.value,
+  firstName: firstName.value,
+  lastName: lastName.value,
+  phone: phone.value,
+  zipCode: zipCode.value,
+  city: city.value,
+  role: "user",
+  createdAt: new Date(),
+});
+
 
         // Redirection après inscription
         alert("Inscription réussie !");
