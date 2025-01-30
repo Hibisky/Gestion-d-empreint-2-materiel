@@ -10,8 +10,10 @@
     "test:e2e": "cypress run"
   },
   "dependencies": {
+    "body-parser": "^1.20.3",
     "bulma": "^1.0.2",
     "core-js": "^3.8.3",
+    "cors": "^2.8.5",
     "express": "^4.21.2",
     "firebase": "^11.0.2",
     "firebase-admin": "^13.0.2",
@@ -50,5 +52,10 @@
     "last 2 versions",
     "not dead",
     "not ie 11"
-  ]
+  ],
+  "description": "```\r npm install\r ```",
+  "main": "babel.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
