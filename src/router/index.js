@@ -10,10 +10,12 @@ import MyReservations from '../components/pages/MyReservations.vue';
 import AllReservations from "../components/pages/AllReservations.vue";
 import AdminManageUsers from '@/components/pages/AdminManageUsers.vue';
 import ProfilPage from '../components/pages/ProfilPage.vue';
+import PasswordResetPage from '../components/pages/PasswordResetPage.vue';
 import FAQPage from '../components/pages/FAQPage.vue'; // Import du composant FAQ
 import SubscriptionPage from '../components/pages/SubscriptionPage.vue';
 import AboutPage from '../components/pages/AboutPage.vue';
 import HelpPage from '../components/pages/HelpPage.vue';
+import MainProfile from '@/components/pages/MainProfile.vue'; 
 
 // Définition des routes
 const routes = [
@@ -31,6 +33,7 @@ const routes = [
   { path: "/all-reservations", name: "AllReservations", component: AllReservations },
   { path: '/profil', name: 'Profil', component: ProfilPage, meta: { showFooter: false } },
   { path: '/subscription', name: 'SubscriptionPage', component: SubscriptionPage, meta: { showFooter: false } },
+  { path: '/password-reset', name: 'PasswordReset', component: PasswordResetPage },
   { path: '/formulaire', name: 'Formulaire', component: SubscriptionPage }, // Formulaire d'inscription
 
   
@@ -44,7 +47,7 @@ const routes = [
     path: '/add-device', 
     name: 'AddDevice', 
     component: AddDevice,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: true, },
   },
   { 
     path: '/devices', 
@@ -52,6 +55,11 @@ const routes = [
     component: Device, 
     meta: { requiresAuth: false },
   }, 
+  {
+    path: '/profile',
+    name: 'MainProfile', 
+    component: MainProfile,
+  },
 ];
 
 

@@ -43,8 +43,9 @@
 <script>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { collection, query, where, getDocs } from 'firebase/firestore';
+
 import { auth, db } from '@/router/firebase.js';
 
 export default {
@@ -59,29 +60,40 @@ export default {
     const login = async () => {
       errorMessage.value = ''; // Réinitialiser le message d'erreur
       try {
-        const userCredential = await signInWithEmailAndPassword(auth, email.value, password.value);
-        const user = userCredential.user;
+        // Connexion à Firebase Auth
+        await signInWithEmailAndPassword(auth, email.value, password.value);
+        // const user = userCredential.user;
 
-        // Récupérer le rôle de l'utilisateur
-        const userDocRef = doc(db, 'users', user.uid);
-        const userDoc = await getDoc(userDocRef);
-        
-        if (userDoc.exists()) {
-          console.log("Données de l'utilisateur :", userDoc.data()); 
-          const userRole = userDoc.data().role; // Récupérer le rôle de l'utilisateur
+        // Récupérer le document correspondant dans la collection "users" pour trouver l'uid
+        const q = query(collection(db, 'users'), where('email', '==', email.value));
+        const querySnapshot = await getDocs(q);
 
-          // Redirection en fonction du rôle
+        if (querySnapshot.empty) {
+          errorMessage.value = "Utilisateur non trouvé dans la base de données.";
+          return;
+        }
+
+        // Chercher l'uid dans le document trouvé
+        let userDoc = null;
+        querySnapshot.forEach((doc) => {
+          userDoc = doc.data(); // On récupère la première correspondance
+        });
+
+        if (userDoc) {
+          // const userUid = userDoc.uid; // Ici tu récupères l'uid de l'utilisateur
+          const userRole = userDoc.role; // Récupérer le rôle de l'utilisateur
+
+          // Redirection en fonction du rôle de l'utilisateur
           if (userRole) {
             if (userRole === 'admin') {
-              router.push({ name: 'Dashboard' }); // Redirige vers le tableau de bord pour l'admin
+              router.push({ name: 'Device' }); // Redirige vers le tableau de bord pour l'admin
             } else {
-              router.push({ name: 'Devices' }); // Redirige vers la page des appareils pour l'utilisateur
+              router.push({ name: 'Device' }); // Redirige vers la page des appareils pour l'utilisateur
+
             }
           } else {
             errorMessage.value = "Rôle de l'utilisateur non défini.";
           }
-        } else {
-          errorMessage.value = "Utilisateur non trouvé dans la base de données.";
         }
       } catch (error) {
         if (error.code === 'auth/user-not-found') {
@@ -93,6 +105,7 @@ export default {
         }
       }
     };
+
 
     // Observer l'état de l'utilisateur
     onAuthStateChanged(auth, async (currentUser) => {
@@ -135,7 +148,6 @@ export default {
 
 
 <style scoped>
-  
   .login-page {
     display: flex;
     flex-direction: column;
@@ -204,4 +216,5 @@ export default {
     font-size: 0.875rem;
     text-align: center;
   }
-  </style>
+
+</style>
