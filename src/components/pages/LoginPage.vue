@@ -1,12 +1,10 @@
 <template>
   <div class="login-page">
-    <!-- Logo principal -->
     <img src="@/assets/images/logoDessin1.png" alt="Logo principal" class="logo logo-primary" />
     <img src="@/assets/images/locamat.png" alt="LocaMat" class="logo logo-secondary" />
     
     <main>
       <div class="login-form">
-        <!-- Formulaire de connexion -->
         <form @submit.prevent="login">
           <div class="form-group">
             <label for="email">Identifiant (Email ou Matricule)</label>
@@ -31,12 +29,10 @@
           <button type="submit" class="btn btn-primary">Connexion</button>
         </form>
 
-        <!-- Options supplémentaires -->
         <div class="options">
           <router-link to="/password-reset" class="link">Mot de passe oublié ?</router-link>
         </div>
 
-        <!-- Message d'erreur -->
         <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
       </div>
       <button @click="goToFormPage" class="btn btn-secondary">Créer un compte</button>
@@ -48,8 +44,8 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
-import { getFirestore, doc, getDoc } from 'firebase/firestore';
-import { auth } from '@/router/firebase.js';
+import { doc, getDoc } from 'firebase/firestore';
+import { auth, db } from '@/router/firebase.js';
 
 export default {
   name: 'LoginPage',
@@ -66,19 +62,23 @@ export default {
         const userCredential = await signInWithEmailAndPassword(auth, email.value, password.value);
         const user = userCredential.user;
 
-        // Initialiser Firestore et récupérer le rôle de l'utilisateur
-        const db = getFirestore();
+        // Récupérer le rôle de l'utilisateur
         const userDocRef = doc(db, 'users', user.uid);
         const userDoc = await getDoc(userDocRef);
-
+        
         if (userDoc.exists()) {
+          console.log("Données de l'utilisateur :", userDoc.data()); 
           const userRole = userDoc.data().role; // Récupérer le rôle de l'utilisateur
 
           // Redirection en fonction du rôle
-          if (userRole === 'admin') {
-            router.push({ name: 'Dashboard' });
+          if (userRole) {
+            if (userRole === 'admin') {
+              router.push({ name: 'Dashboard' }); // Redirige vers le tableau de bord pour l'admin
+            } else {
+              router.push({ name: 'Devices' }); // Redirige vers la page des appareils pour l'utilisateur
+            }
           } else {
-            router.push({ name: 'Devices' });
+            errorMessage.value = "Rôle de l'utilisateur non défini.";
           }
         } else {
           errorMessage.value = "Utilisateur non trouvé dans la base de données.";
@@ -97,17 +97,22 @@ export default {
     // Observer l'état de l'utilisateur
     onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
-        const db = getFirestore();
         const userDocRef = doc(db, 'users', currentUser.uid);
         const userDoc = await getDoc(userDocRef);
 
         if (userDoc.exists()) {
           const userRole = userDoc.data().role;
-          if (userRole === 'admin') {
-            router.push({ name: 'Dashboard' });
+          if (userRole) {
+            if (userRole === 'admin') {
+              router.push({ name: 'Dashboard' });
+            } else {
+              router.push({ name: 'Devices' });
+            }
           } else {
-            router.push({ name: 'Devices' });
+            errorMessage.value = "Rôle de l'utilisateur non défini.";
           }
+        } else {
+          errorMessage.value = "Utilisateur non trouvé dans la base de données.";
         }
       }
     });
@@ -126,6 +131,8 @@ export default {
   },
 };
 </script>
+
+
 
 <style scoped>
   
@@ -198,4 +205,3 @@ export default {
     text-align: center;
   }
   </style>
-  
