@@ -45,6 +45,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { collection, query, where, getDocs } from 'firebase/firestore';
+
 import { auth, db } from '@/router/firebase.js';
 
 export default {
@@ -88,6 +89,7 @@ export default {
               router.push({ name: 'Device' }); // Redirige vers le tableau de bord pour l'admin
             } else {
               router.push({ name: 'Device' }); // Redirige vers la page des appareils pour l'utilisateur
+
             }
           } else {
             errorMessage.value = "Rôle de l'utilisateur non défini.";
@@ -104,6 +106,30 @@ export default {
       }
     };
 
+
+    // Observer l'état de l'utilisateur
+    onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        const userDocRef = doc(db, 'users', currentUser.uid);
+        const userDoc = await getDoc(userDocRef);
+
+        if (userDoc.exists()) {
+          const userRole = userDoc.data().role;
+          if (userRole) {
+            if (userRole === 'admin') {
+              router.push({ name: 'Dashboard' });
+            } else {
+              router.push({ name: 'Devices' });
+            }
+          } else {
+            errorMessage.value = "Rôle de l'utilisateur non défini.";
+          }
+        } else {
+          errorMessage.value = "Utilisateur non trouvé dans la base de données.";
+        }
+      }
+    });
+
     const goToFormPage = () => {
       router.push({ name: 'Formulaire' });
     };
@@ -118,6 +144,8 @@ export default {
   },
 };
 </script>
+
+
 
 <style scoped>
   .login-page {
@@ -188,4 +216,5 @@ export default {
     font-size: 0.875rem;
     text-align: center;
   }
+
 </style>

@@ -7,6 +7,7 @@ const admin = require("firebase-admin");
 // Charger la clé privée de Firebase (assure-toi que le fichier JSON est au bon endroit)
 const serviceAccount = require("./test-securite-tp-firebase-adminsdk-1uizc-b4117ef7f7.json");
 
+
 // Initialisation de Firebase avec la clé privée
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
