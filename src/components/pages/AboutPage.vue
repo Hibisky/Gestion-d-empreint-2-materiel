@@ -16,7 +16,7 @@
           <div class="columns is-vcentered">
             <div class="column is-6 has-text-centered">
               <h3 class="title is-4">Optimisez vos coûts</h3>
-              <p>Évitez un investissement initial lourd et maîtrisez votre budget grâce à la location.</p>
+              <p>Investir dans du matériel informatique peut représenter une charge financière importante. En optant pour la location, vous réduisez les coûts initiaux et bénéficiez d’un matériel performant sans immobiliser vos fonds. Vous avez la possibilité d’ajuster votre parc informatique en fonction de votre croissance et de vos besoins sans surcoût inattendu.</p>
             </div>
             <div class="column is-6">
               <figure class="image is-4by3">
@@ -36,7 +36,7 @@
             </div>
             <div class="column is-6 has-text-centered">
               <h3 class="title is-4">Flexibilité</h3>
-              <p>Adaptez votre matériel en fonction de vos besoins et des évolutions technologiques.</p>
+              <p>Dans un monde en perpétuelle évolution, votre entreprise doit pouvoir s’adapter rapidement. La location vous permet de renouveler régulièrement votre matériel et d’accéder aux dernières innovations sans vous soucier de l’obsolescence. Vous bénéficiez d’un matériel toujours à la pointe, adapté à vos exigences du moment.</p>
             </div>
           </div>
         </div>
@@ -46,7 +46,7 @@
           <div class="columns is-vcentered">
             <div class="column is-6 has-text-centered">
               <h3 class="title is-4">Engagement écologique</h3>
-              <p>Réduisez l’obsolescence et contribuez à une économie circulaire en réutilisant du matériel.</p>
+              <p>Nous avons tous un rôle à jouer dans la réduction de l’impact environnemental. En louant votre matériel, vous limitez le gaspillage et favorisez la réutilisation des équipements. Cette approche durable permet de prolonger la durée de vie des produits et de réduire les déchets électroniques.</p>
             </div>
             <div class="column is-6">
               <figure class="image is-4by3">
@@ -66,7 +66,7 @@
             </div>
             <div class="column is-6 has-text-centered">
               <h3 class="title is-4">Commerce circulaire</h3>
-              <p>Participer au commerce circulaire, c'est donner une seconde vie aux équipements et réduire le gaspillage technologique.</p>
+              <p>Le commerce circulaire repose sur une économie plus responsable et durable. En réemployant et en optimisant l’utilisation des équipements informatiques, vous contribuez à limiter la production de nouveaux matériels et à préserver les ressources naturelles. Choisir la location, c’est participer activement à cette démarche tout en profitant d’un matériel performant et accessible.</p>
             </div>
           </div>
         </div>
