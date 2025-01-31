@@ -2,7 +2,9 @@
   <div class="faq-page">
     <!-- Image en fond -->
     <div class="faq-header">
-      <h1>Questions Fréquentes </h1>
+      <div class="faq-title-box">
+        <h1>Questions Fréquentes</h1>
+      </div>
     </div>
 
     <div class="faq-container">
@@ -53,17 +55,28 @@ export default {
   text-align: center;
 }
 
-/* Image en fond du titre */
+/* Image en fond */
 .faq-header {
   background: lightskyblue center/cover no-repeat;
   padding: 80px 20px;
-  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.faq-header h1 {
+/* Bloc blanc autour du titre */
+.faq-title-box {
+  background: white;
+  padding: 20px 40px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.faq-title-box h1 {
   font-size: 32px;
   font-weight: bold;
   margin: 0;
+  color: #007BFF;
 }
 
 /* Conteneur des FAQ */
@@ -114,29 +127,6 @@ export default {
   margin-top: 5px;
 }
 
-/* Animation slide */
-.slide-enter-active, .slide-leave-active {
-  transition: max-height 0.3s ease-out, opacity 0.3s;
-  overflow: hidden;
-}
-
-.slide-enter, .slide-leave-to {
-  max-height: 0;
-  opacity: 0;
-}
-
-.slide-enter-to, .slide-leave {
-  max-height: 100px;
-  opacity: 1;
-}
-
-/* Footer */
-.faq-footer {
-  margin-top: 30px;
-  padding: 15px;
-  background: #0056b3; /* Bleu foncé */
-  color: white;
-}
 /* Animation plus fluide et rapide */
 .slide-enter-active, .slide-leave-active {
   transition: transform 0.2s ease-out, opacity 0.2s;
@@ -153,4 +143,11 @@ export default {
   opacity: 1;
 }
 
+/* Footer */
+.faq-footer {
+  margin-top: 30px;
+  padding: 15px;
+  background: #0056b3; /* Bleu foncé */
+  color: white;
+}
 </style>
