@@ -7,15 +7,18 @@
       </div>
     </div>
 
-    <div class="faq-container">
-      <div class="faq-item" v-for="(faq, index) in faqs" :key="index">
-        <button class="faq-question" @click="toggleFAQ(index)">
-          {{ faq.question }}
-          <span class="arrow" :class="{ open: activeIndex === index }">▼</span>
-        </button>
-        <transition name="slide">
-          <p v-if="activeIndex === index" class="faq-answer">{{ faq.answer }}</p>
-        </transition>
+    <!-- Bloc blanc englobant toutes les questions -->
+    <div class="faq-content">
+      <div class="faq-container">
+        <div class="faq-item" v-for="(faq, index) in faqs" :key="index">
+          <button class="faq-question" @click="toggleFAQ(index)">
+            {{ faq.question }}
+            <span class="arrow" :class="{ open: activeIndex === index }">▼</span>
+          </button>
+          <transition name="slide">
+            <p v-if="activeIndex === index" class="faq-answer">{{ faq.answer }}</p>
+          </transition>
+        </div>
       </div>
     </div>
 
@@ -86,6 +89,16 @@ export default {
   color: #007BFF;
 }
 
+/* Bloc blanc contenant toutes les questions */
+.faq-content {
+  background: white;
+  max-width: 90%;
+  margin: 30px auto;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 /* Conteneur des FAQ */
 .faq-container {
   max-width: 600px;
@@ -95,7 +108,7 @@ export default {
 
 /* Boutons arrondis */
 .faq-question {
-  width: 100%;
+  width: 90%;
   background-color: #007BFF; /* Bleu */
   color: white;
   border: none;
@@ -109,6 +122,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   transition: background 0.2s;
+  margin-bottom: 10px;
 }
 
 .faq-question:hover {
@@ -127,11 +141,13 @@ export default {
 
 /* Réponse animée */
 .faq-answer {
+  width: 90%;
   padding: 15px;
   color: #333;
   background-color: white;
   border-radius: 10px;
   margin-top: 5px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Animation plus fluide et rapide */
