@@ -10,48 +10,64 @@
 
   <section class="section">
     <div class="container">
-      <div class="columns is-multiline">
+      <div class="columns is-multiline is-variable is-8">
         <!-- Économie -->
-        <div class="column is-6">
-          <div class="box has-text-centered">
-            <span class="icon is-large">
-              <i class="fas fa-piggy-bank fa-3x"></i>
-            </span>
-            <h3 class="title is-4">Optimisez vos coûts</h3>
-            <p>Évitez un investissement initial lourd et maîtrisez votre budget grâce à la location.</p>
+        <div class="column is-12">
+          <div class="columns is-vcentered">
+            <div class="column is-6 has-text-centered">
+              <h3 class="title is-4">Optimisez vos coûts</h3>
+              <p>Évitez un investissement initial lourd et maîtrisez votre budget grâce à la location.</p>
+            </div>
+            <div class="column is-6">
+              <figure class="image is-4by3">
+                <img src="https://source.unsplash.com/600x400/?money,savings" alt="Optimisation des coûts">
+              </figure>
+            </div>
           </div>
         </div>
         
         <!-- Flexibilité -->
-        <div class="column is-6">
-          <div class="box has-text-centered">
-            <span class="icon is-large">
-              <i class="fas fa-exchange-alt fa-3x"></i>
-            </span>
-            <h3 class="title is-4">Flexibilité</h3>
-            <p>Adaptez votre matériel en fonction de vos besoins et des évolutions technologiques.</p>
+        <div class="column is-12">
+          <div class="columns is-vcentered">
+            <div class="column is-6">
+              <figure class="image is-4by3">
+                <img src="https://source.unsplash.com/600x400/?technology,adaptability" alt="Flexibilité">
+              </figure>
+            </div>
+            <div class="column is-6 has-text-centered">
+              <h3 class="title is-4">Flexibilité</h3>
+              <p>Adaptez votre matériel en fonction de vos besoins et des évolutions technologiques.</p>
+            </div>
           </div>
         </div>
         
         <!-- Écologie -->
-        <div class="column is-6">
-          <div class="box has-text-centered">
-            <span class="icon is-large">
-              <i class="fas fa-leaf fa-3x"></i>
-            </span>
-            <h3 class="title is-4">Engagement écologique</h3>
-            <p>Réduisez l’obsolescence et contribuez à une économie circulaire en réutilisant du matériel.</p>
+        <div class="column is-12">
+          <div class="columns is-vcentered">
+            <div class="column is-6 has-text-centered">
+              <h3 class="title is-4">Engagement écologique</h3>
+              <p>Réduisez l’obsolescence et contribuez à une économie circulaire en réutilisant du matériel.</p>
+            </div>
+            <div class="column is-6">
+              <figure class="image is-4by3">
+                <img src="https://source.unsplash.com/600x400/?recycling,green" alt="Écologie">
+              </figure>
+            </div>
           </div>
         </div>
-        
-        <!-- Technologie -->
-        <div class="column is-6">
-          <div class="box has-text-centered">
-            <span class="icon is-large">
-              <i class="fas fa-microchip fa-3x"></i>
-            </span>
-            <h3 class="title is-4">Accès à la dernière technologie</h3>
-            <p>Bénéficiez d’un matériel toujours à jour pour une meilleure performance.</p>
+
+        <!-- Commerce circulaire -->
+        <div class="column is-12">
+          <div class="columns is-vcentered">
+            <div class="column is-6">
+              <figure class="image is-4by3">
+                <img src="https://source.unsplash.com/600x400/?circular,economy" alt="Commerce circulaire">
+              </figure>
+            </div>
+            <div class="column is-6 has-text-centered">
+              <h3 class="title is-4">Commerce circulaire</h3>
+              <p>Participer au commerce circulaire, c'est donner une seconde vie aux équipements et réduire le gaspillage technologique.</p>
+            </div>
           </div>
         </div>
       </div>
