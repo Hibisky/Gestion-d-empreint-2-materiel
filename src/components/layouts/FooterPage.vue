@@ -4,7 +4,7 @@
         <!-- Section logo et copyright -->
         <div class="footer-logo">
           <img src="@/assets/images/logoDessin1.png" alt="Logo" class="logo" />
-          <p>© 2024 MonApplication. Tous droits réservés.</p>
+          <p>© 2024 LOCAMAT. Tous droits réservés.</p>
         </div>
         <!-- Section des réseaux sociaux -->
         <div class="footer-socials">
