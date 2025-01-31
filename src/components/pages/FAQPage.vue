@@ -44,7 +44,7 @@ export default {
         { question: "Comment suivre ma réservation?", answer: "Vous pouvez suivre votre réservationdepuis votre espace client dans la section 'Mes commandes'." },
         { question: "Quels sont les délais de livraison ?", answer: "Les délais varient entre 3 à 5 jours ouvrés selon votre localisation." },
         { question: "Puis-je modifier ou annuler ma réservation?", answer: "Oui, tant que votre réservationn’a pas été expédiée, vous pouvez la modifier ou l'annuler dans votre espace client." },
-        { question: "Comment contacter le support client ?", answer: "Vous pouvez nous contacter par e-mail à support@votresite.com ou via le chat en ligne." },
+        { question: "Comment contacter le support client ?", answer: "Vous pouvez nous contacter par e-mail à support@locamat.com ou via le chat en ligne." },
         { question: "Proposez-vous des garanties sur les produits ?", answer: "Oui, tous nos produits sont couverts par une garantie de 2 ans." },
         { question: "Puis-je retourner un produit ?", answer: "Vous disposez de 14 jours après réception pour retourner un produit en parfait état." }
       ],
