@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { auth } from '../router/firebase';
-//import AuthExample from '../components/AuthExample.vue';
 import LoginPage from '../components/pages/LoginPage.vue';
 import HomePage from '../components/pages/HomePage.vue';
 import AddDevice from '../components/pages/AddDevice.vue';
@@ -13,7 +12,6 @@ import ProfilPage from '../components/pages/ProfilPage.vue';
 import FAQPage from '../components/pages/FAQPage.vue'; // Import du composant FAQ
 import SubscriptionPage from '../components/pages/SubscriptionPage.vue';
 import AboutPage from '../components/pages/AboutPage.vue';
-import HelpPage from '../components/pages/HelpPage.vue';
 
 // Définition des routes
 const routes = [
@@ -22,7 +20,6 @@ const routes = [
   { path: '/', name: 'HomePage', component: HomePage, meta: { showFooter: true } },
   { path: '/faq', name: 'FAQPage', component: FAQPage, meta: { showFooter: true } },
   { path: '/about', name: 'AboutPage', component: AboutPage, meta: { showFooter: true } },
-  { path: '/help', name: 'HelpPage', component: HelpPage, meta: { showFooter: true } },
   { path: '/add-device', name: 'AddDevice', component: AddDevice, meta: { showFooter: false } },
   { path: '/devices', name: 'Device', component: Device, meta: { showFooter: true } },
   { path: '/reservation', name: 'Reservation', component: ReservationPage, meta: { showFooter: false } },
@@ -31,7 +28,7 @@ const routes = [
   { path: "/all-reservations", name: "AllReservations", component: AllReservations },
   { path: '/profil', name: 'Profil', component: ProfilPage, meta: { showFooter: false } },
   { path: '/subscription', name: 'SubscriptionPage', component: SubscriptionPage, meta: { showFooter: false } },
-  { path: '/formulaire', name: 'Formulaire', component: SubscriptionPage }, // Formulaire d'inscription
+  { path: '/formulaire', name: 'Formulaire', component: SubscriptionPage, meta: { showFooter: true } },
 
   
   {

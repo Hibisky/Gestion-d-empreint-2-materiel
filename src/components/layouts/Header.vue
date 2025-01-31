@@ -10,7 +10,6 @@
       <!-- Liens pour les non-connectés -->
       <router-link v-if="!user" to="/">Accueil</router-link>
       <router-link v-if="!user" to="/faq">FAQ</router-link>
-      <router-link v-if="!user" to="/help">Support</router-link>
       <router-link v-if="!user" to="/about">À propos</router-link>
 
       <!-- Liens pour les utilisateurs connectés -->
