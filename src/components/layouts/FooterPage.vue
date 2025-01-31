@@ -9,13 +9,13 @@
         <!-- Section des réseaux sociaux -->
         <div class="footer-socials">
           <a href="https://facebook.com" target="_blank" class="social-link" aria-label="Facebook">
-            <img src="@/assets/facebook-icon.png" alt="Facebook" />
+            <img src="@/assets/images/facebook-icon.png" alt="Facebook" />
           </a>
           <a href="https://twitter.com" target="_blank" class="social-link" aria-label="Twitter">
-            <img src="@/assets/twitter-icon.png" alt="Twitter" />
+            <img src="@/assets/images/twitter-icon.png" alt="Twitter" />
           </a>
           <a href="https://linkedin.com" target="_blank" class="social-link" aria-label="LinkedIn">
-            <img src="@/assets/linkedin-icon.png" alt="LinkedIn" />
+            <img src="@/assets/images/tiktok-icon.png" alt="LinkedIn" />
           </a>
         </div>
       </div>
@@ -23,10 +23,24 @@
   </template>
   
   <script>
+  import logoDessin from "@/assets/images/logoDessin1.png";
+  import facebookIcon from "@/assets/images/facebook-icon.png";
+  import twitterIcon from "@/assets/images/twitter-icon.png";
+  import tiktokIcon from "@/assets/images/tiktok-icon.png";
+  
   export default {
-    name: "Footer",
+    name: "FooterPage",
+    data() {
+      return {
+        logoDessin,
+        facebookIcon,
+        twitterIcon,
+        tiktokIcon
+      };
+    }
   };
   </script>
+  
   
   <style scoped>
   .main-footer {

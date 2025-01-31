@@ -22,16 +22,19 @@
       </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="faq-footer">
-      <p>&copy; 2025 VotreSite - Tous droits réservés</p>
-    </footer>
+    <!-- Utilisation du composant Footer -->
+    <Footer />
   </div>
 </template>
 
 <script>
+import Footer from "@/components/layouts/FooterPage.vue"
+
 export default {
   name: "FAQPage",
+  components: {
+    Footer,
+  },
   data() {
     return {
       faqs: [
@@ -56,6 +59,7 @@ export default {
   },
 };
 </script>
+
 
 <style>
 /* Styles de la page FAQ */
