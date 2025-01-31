@@ -5,97 +5,50 @@
       <!-- Adresse email -->
       <div class="form-group">
         <label for="email">Adresse e-mail :</label>
-        <input
-          type="email"
-          id="email"
-          v-model="email"
-          placeholder="prenom.nom@domain.com"
-          required
-        />
+        <input type="email" id="email" v-model="email" placeholder="prenom.nom@domain.com" required />
       </div>
 
       <!-- Mot de passe -->
       <div class="form-group">
         <label for="password">Mot de passe :</label>
-        <input
-          type="password"
-          id="password"
-          v-model="password"
-          placeholder="Mot de passe sécurisé"
-          required
-        />
+        <input type="password" id="password" v-model="password" placeholder="Mot de passe sécurisé" required />
+        <small>8 caractères min., majuscule, minuscule, chiffre et caractère spécial</small>
       </div>
 
       <!-- Confirmation du mot de passe -->
       <div class="form-group">
         <label for="confirm-password">Confirmer le mot de passe :</label>
-        <input
-          type="password"
-          id="confirm-password"
-          v-model="confirmPassword"
-          placeholder="Confirmez votre mot de passe"
-          required
-        />
+        <input type="password" id="confirm-password" v-model="confirmPassword" placeholder="Confirmez votre mot de passe" required />
       </div>
 
       <!-- Prénom -->
       <div class="form-group">
         <label for="first-name">Prénom :</label>
-        <input
-          type="text"
-          id="first-name"
-          v-model="firstName"
-          placeholder="Votre prénom"
-          required
-        />
+        <input type="text" id="first-name" v-model="firstName" placeholder="Votre prénom" required />
       </div>
 
       <!-- Nom -->
       <div class="form-group">
         <label for="last-name">Nom :</label>
-        <input
-          type="text"
-          id="last-name"
-          v-model="lastName"
-          placeholder="Votre nom"
-          required
-        />
+        <input type="text" id="last-name" v-model="lastName" placeholder="Votre nom" required />
       </div>
 
       <!-- Numéro de téléphone -->
       <div class="form-group">
         <label for="phone">Numéro de téléphone :</label>
-        <input
-          type="tel"
-          id="phone"
-          v-model="phone"
-          placeholder="Votre numéro de téléphone"
-          required
-        />
+        <input type="tel" id="phone" v-model="phone" placeholder="Votre numéro de téléphone" required />
       </div>
 
       <!-- Code postal -->
       <div class="form-group">
         <label for="zip-code">Code postal :</label>
-        <input
-          type="text"
-          id="zip-code"
-          v-model="zipCode"
-          placeholder="Code postal"
-          required
-        />
+        <input type="text" id="zip-code" v-model="zipCode" placeholder="Code postal" required />
       </div>
 
       <!-- Ville -->
       <div class="form-group">
         <label for="city">Ville :</label>
-        <input
-          type="text"
-          id="city"
-          v-model="city"
-          placeholder="Ville"
-          required
-        />
+        <input type="text" id="city" v-model="city" placeholder="Ville" required />
       </div>
 
       <!-- Bouton d'inscription -->
@@ -107,16 +60,12 @@
   </div>
 </template>
 
----
-
-### Script : Gestion de l'inscription et Firebase
-```javascript
 <script>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { addDoc, collection } from "firebase/firestore";
-import { auth, db } from "@/router/firebase"; // Assurez-vous que Firebase est configuré correctement
+import { auth, db } from "@/router/firebase";
 
 export default {
   name: "RegisterPage",
@@ -132,25 +81,45 @@ export default {
     const errorMessage = ref("");
     const router = useRouter();
 
+    const isValidPassword = (password) => {
+      return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password);
+    };
+
+    const isValidText = (text) => {
+      return /^[A-Za-zÀ-ÿ\s-]+$/.test(text);
+    };
+
+    const isValidPhone = (phone) => {
+      return /^\+?[0-9]{10,15}$/.test(phone);
+    };
+
     const registerUser = async () => {
       errorMessage.value = "";
 
-      // Vérification des mots de passe
+      if (!isValidPassword(password.value)) {
+        errorMessage.value = "Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.";
+        return;
+      }
+
       if (password.value !== confirmPassword.value) {
         errorMessage.value = "Les mots de passe ne correspondent pas.";
         return;
       }
 
+      if (!isValidText(firstName.value) || !isValidText(lastName.value) || !isValidText(city.value)) {
+        errorMessage.value = "Le prénom, le nom et la ville ne doivent contenir que des lettres.";
+        return;
+      }
+
+      if (!isValidPhone(phone.value)) {
+        errorMessage.value = "Le numéro de téléphone est invalide.";
+        return;
+      }
+
       try {
-        // Création de l'utilisateur dans Firebase Auth
-        const userCredential = await createUserWithEmailAndPassword(
-          auth,
-          email.value,
-          password.value
-        );
+        const userCredential = await createUserWithEmailAndPassword(auth, email.value, password.value);
         const user = userCredential.user;
 
-        // Enregistrement des informations supplémentaires dans Firestore
         await addDoc(collection(db, "users"), {
           uid: user.uid,
           email: email.value,
@@ -163,11 +132,9 @@ export default {
           createdAt: new Date(),
         });
 
-        // Redirection après inscription
         alert("Inscription réussie !");
         router.push("/login");
       } catch (error) {
-        console.error("Erreur lors de l'inscription :", error);
         errorMessage.value = error.message;
       }
     };
@@ -187,6 +154,7 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 .register-page {
   max-width: 500px;
