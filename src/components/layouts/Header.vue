@@ -8,11 +8,9 @@
     <!-- Menu de navigation -->
     <nav class="nav-center">
       <!-- Liens pour les non-connectés -->
-      <router-link v-if="!user" to="/" class="navbar-item">Accueil</router-link>
-      <router-link v-if="!user" to="/faq" class="navbar-item">FAQ</router-link>
-      <router-link v-if="!user" to="/help" class="navbar-item">Support</router-link>
-      <router-link v-if="!user" to="/about" class="navbar-item">À propos</router-link>
-      <router-link v-if="!user" to="/devices" class="navbar-item">Appareils Disponibles</router-link>
+      <router-link v-if="!user" to="/">Accueil</router-link>
+      <router-link v-if="!user" to="/faq">FAQ</router-link>
+      <router-link v-if="!user" to="/about">À propos</router-link>
 
       <!-- Liens pour les utilisateurs connectés -->
       <router-link v-if="user" to="/profile" class="navbar-item">Profil</router-link>
