@@ -24,9 +24,9 @@
   
   <script>
   import logoDessin from "@/assets/images/logoDessin1.png";
-  import facebookIcon from "@/assets/images/facebook-icon.png";
-  import twitterIcon from "@/assets/images/twitter-icon.png";
-  import tiktokIcon from "@/assets/images/tiktok-icon.png";
+  import facebookIcon from "@/assets/images/instagram-icon.jpeg";
+  import twitterIcon from "@/assets/images/twitter-icon.jpeg";
+  import tiktokIcon from "@/assets/images/tiktok-icon.jpeg";
   
   export default {
     name: "FooterPage",
@@ -75,7 +75,11 @@
     height: auto;
     margin-bottom: 10px;
   }
-  
+  .logo, .social-link img {
+  border: 1px solid red;
+  background-color: lightgray;
+}
+
   .footer-nav {
     display: flex;
     gap: 15px;
