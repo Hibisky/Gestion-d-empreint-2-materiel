@@ -9,48 +9,26 @@ import MyReservations from '../components/pages/MyReservations.vue';
 import AllReservations from "../components/pages/AllReservations.vue";
 import AdminManageUsers from '@/components/pages/AdminManageUsers.vue';
 import ProfilPage from '../components/pages/ProfilPage.vue';
-import FAQPage from '../components/pages/FAQPage.vue'; // Import du composant FAQ
+import FAQPage from '../components/pages/FAQPage.vue';
 import SubscriptionPage from '../components/pages/SubscriptionPage.vue';
 import AboutPage from '../components/pages/AboutPage.vue';
 
 // Définition des routes
 const routes = [
-
+  { path: '/', name: 'HomePage', component: HomePage, meta: { showFooter: true, requiresAuth: false } },
   { path: '/auth', name: 'auth', component: LoginPage, meta: { showFooter: true } },
-  { path: '/', name: 'HomePage', component: HomePage, meta: { showFooter: true } },
   { path: '/faq', name: 'FAQPage', component: FAQPage, meta: { showFooter: true } },
   { path: '/about', name: 'AboutPage', component: AboutPage, meta: { showFooter: true } },
-  { path: '/add-device', name: 'AddDevice', component: AddDevice, meta: { showFooter: false } },
-  { path: '/devices', name: 'Device', component: Device, meta: { showFooter: true } },
-  { path: '/reservation', name: 'Reservation', component: ReservationPage, meta: { showFooter: false } },
-  { path: '/my-reservations', name: 'MyReservations', component: MyReservations, meta: { showFooter: false } },
-  { path: '/manage-users', name: 'AdminManageUsers', component: AdminManageUsers, meta: { showFooter: false } },
-  { path: "/all-reservations", name: "AllReservations", component: AllReservations },
-  { path: '/profil', name: 'Profil', component: ProfilPage, meta: { showFooter: false } },
-  { path: '/subscription', name: 'SubscriptionPage', component: SubscriptionPage, meta: { showFooter: false } },
-  { path: '/formulaire', name: 'Formulaire', component: SubscriptionPage, meta: { showFooter: true } },
-
-  
-  {
-    path: '/home-page',
-    name: 'HomePage',
-    component: HomePage, // Page d'accueil
-    meta: { requiresAuth: false }, // Cette route nécessite pas une authentification
-  },
-  { 
-    path: '/add-device', 
-    name: 'AddDevice', 
-    component: AddDevice,
-    meta: { requiresAuth: true },
-  },
-  { 
-    path: '/devices', 
-    name: 'Device', 
-    component: Device, 
-    meta: { requiresAuth: false },
-  }, 
+  { path: '/add-device', name: 'AddDevice', component: AddDevice, meta: { requiresAuth: true, showFooter: false } },
+  { path: '/devices', name: 'Device', component: Device, meta: { requiresAuth: false, showFooter: true } },
+  { path: '/reservation', name: 'Reservation', component: ReservationPage, meta: { requiresAuth: true, showFooter: false } },
+  { path: '/my-reservations', name: 'MyReservations', component: MyReservations, meta: { requiresAuth: true, showFooter: false } },
+  { path: '/manage-users', name: 'AdminManageUsers', component: AdminManageUsers, meta: { requiresAuth: true, showFooter: false } },
+  { path: '/all-reservations', name: 'AllReservations', component: AllReservations, meta: { requiresAuth: true } },
+  { path: '/profil', name: 'Profil', component: ProfilPage, meta: { requiresAuth: true, showFooter: false } },
+  { path: '/subscription', name: 'SubscriptionPage', component: SubscriptionPage, meta: { requiresAuth: false, showFooter: false } },
+  { path: '/formulaire', name: 'Formulaire', component: SubscriptionPage, meta: { requiresAuth: false, showFooter: true } },
 ];
-
 
 // Création du routeur
 const router = createRouter({
@@ -64,7 +42,7 @@ router.beforeEach((to, from, next) => {
   const user = auth.currentUser;
 
   if (requiresAuth && !user) {
-    next('/'); // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+    next('/auth'); // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
   } else {
     next(); // Continuer la navigation
   }
