@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { auth } from '../router/firebase';
-//import AuthExample from '../components/AuthExample.vue';
 import LoginPage from '../components/pages/LoginPage.vue';
 import HomePage from '../components/pages/HomePage.vue';
 import AddDevice from '../components/pages/AddDevice.vue';
@@ -24,7 +23,6 @@ const routes = [
   { path: '/', name: 'HomePage', component: HomePage, meta: { showFooter: true } },
   { path: '/faq', name: 'FAQPage', component: FAQPage, meta: { showFooter: true } },
   { path: '/about', name: 'AboutPage', component: AboutPage, meta: { showFooter: true } },
-  { path: '/help', name: 'HelpPage', component: HelpPage, meta: { showFooter: true } },
   { path: '/add-device', name: 'AddDevice', component: AddDevice, meta: { showFooter: false } },
   { path: '/devices', name: 'Device', component: Device, meta: { showFooter: true } },
   { path: '/reservation', name: 'Reservation', component: ReservationPage, meta: { showFooter: false } },
