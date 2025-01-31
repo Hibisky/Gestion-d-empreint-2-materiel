@@ -52,7 +52,7 @@ npm install --save-dev mochawesome mochawesome-merge mochawesome-report-generato
    - Vérification du message de succès
 
 ### Commandes personnalisées
-Création d'une commande de connexion dans `commands.js` :
+Création d'une réservationde connexion dans `commands.js` :
 ```javascript
 Cypress.Commands.add('login', () => {
   // Augmenter le timeout pour la commande
@@ -101,7 +101,7 @@ Cypress.Commands.add('login', () => {
 ### 3. Problème d'authentification
 **Problème** : Difficulté à maintenir l'état de connexion.
 **Solution** : 
-- Amélioration de la commande de connexion
+- Amélioration de la réservationde connexion
 - Attente explicite des redirections
 - Vérification de l'état de la page après connexion
 

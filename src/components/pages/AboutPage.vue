@@ -4,7 +4,6 @@
     <div class="about-header">
       <div class="about-title-box">
         <h1>Pourquoi louer votre matériel informatique avec Locamat ?</h1>
-        <h2 class="subtitle">Innovation, flexibilité et responsabilité</h2>
       </div>
     </div>
 
