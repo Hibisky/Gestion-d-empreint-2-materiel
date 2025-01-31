@@ -12,7 +12,7 @@
       <div class="faq-container">
         <div class="faq-item" v-for="(faq, index) in faqs" :key="index">
           <button class="faq-question" @click="toggleFAQ(index)">
-            {{ faq.question }}
+            <span class="question-text">{{ faq.question }}</span>
             <span class="arrow" :class="{ open: activeIndex === index }">▼</span>
           </button>
           <transition name="slide">
@@ -101,22 +101,22 @@ export default {
 
 /* Conteneur des FAQ */
 .faq-container {
-  max-width: 600px;
+  max-width: 800px; /* Largeur maximale du conteneur */
   margin: auto;
   padding: 20px;
 }
 
-/* Boutons arrondis */
+/* Boutons plus carrés et plus longs */
 .faq-question {
-  width: 90%;
+  width: 100%;
   background-color: #007BFF; /* Bleu */
   color: white;
   border: none;
-  padding: 15px;
+  padding: 18px;
   text-align: left;
   font-size: 18px;
   font-weight: bold;
-  border-radius: 30px; /* Arrondi */
+  border-radius: 10px; /* Moins arrondi */
   cursor: pointer;
   display: flex;
   justify-content: space-between;
@@ -125,11 +125,13 @@ export default {
   margin-bottom: 10px;
 }
 
-.faq-question:hover {
-  background-color: #0056b3; /* Bleu foncé */
+/* Texte des questions bien aligné à gauche */
+.question-text {
+  flex: 1;
+  text-align: left;
 }
 
-/* Flèche animée */
+/* Flèche à droite */
 .arrow {
   font-size: 18px;
   transition: transform 0.3s ease;
@@ -139,9 +141,14 @@ export default {
   transform: rotate(180deg);
 }
 
+/* Hover effet */
+.faq-question:hover {
+  background-color: #0056b3; /* Bleu foncé */
+}
+
 /* Réponse animée */
 .faq-answer {
-  width: 90%;
+  width: 100%;
   padding: 15px;
   color: #333;
   background-color: white;
