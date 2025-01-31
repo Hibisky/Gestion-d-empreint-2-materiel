@@ -8,14 +8,14 @@
         </div>
         <!-- Section des réseaux sociaux -->
         <div class="footer-socials">
-          <a href="https://facebook.com" target="_blank" class="social-link" aria-label="Facebook">
-            <img src="@/assets/images/facebook-icon.png" alt="Facebook" />
+          <a href="https://instagram.com" target="_blank" class="social-link" aria-label="Facebook">
+            <img src="@/assets/images/instagram-icon.jpeg" alt="Facebook" />
           </a>
           <a href="https://twitter.com" target="_blank" class="social-link" aria-label="Twitter">
-            <img src="@/assets/images/twitter-icon.png" alt="Twitter" />
+            <img src="@/assets/images/twitter-icon.jpeg" alt="Twitter" />
           </a>
-          <a href="https://linkedin.com" target="_blank" class="social-link" aria-label="LinkedIn">
-            <img src="@/assets/images/tiktok-icon.png" alt="LinkedIn" />
+          <a href="https:/tiktok.com" target="_blank" class="social-link" aria-label="LinkedIn">
+            <img src="@/assets/images/tiktok-icon.jpeg" alt="LinkedIn" />
           </a>
         </div>
       </div>
@@ -24,9 +24,9 @@
   
   <script>
   import logoDessin from "@/assets/images/logoDessin1.png";
-  import facebookIcon from "@/assets/images/instagram-icon.jpeg";
-  import twitterIcon from "@/assets/images/twitter-icon.jpeg";
-  import tiktokIcon from "@/assets/images/tiktok-icon.jpeg";
+  import facebookIcon from "@/assets/images/instagram-icon.png";
+  import twitterIcon from "@/assets/images/twitter-icon.png";
+  import tiktokIcon from "@/assets/images/tiktok-icon.png";
   
   export default {
     name: "FooterPage",
@@ -75,10 +75,7 @@
     height: auto;
     margin-bottom: 10px;
   }
-  .logo, .social-link img {
-  border: 1px solid red;
-  background-color: lightgray;
-}
+
 
   .footer-nav {
     display: flex;
