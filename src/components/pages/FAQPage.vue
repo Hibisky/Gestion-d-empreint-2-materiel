@@ -38,7 +38,6 @@ export default {
   data() {
     return {
       faqs: [
-        { question: "Comment puis-je m'inscrire ?", answer: "Vous pouvez vous inscrire en cliquant sur le bouton 'S'inscrire' dans la page d'accueil." },
         { question: "Puis-je accéder à mon profil ?", answer: "Oui, vous pouvez accéder à votre profil depuis le menu principal après vous être connecté." },
         { question: "Comment ajouter un appareil ?", answer: "Rendez-vous sur la page Ajouter un appareil via le menu pour enregistrer un nouvel appareil." },
         { question: "Quels modes de paiement acceptez-vous ?", answer: "Nous acceptons les paiements par carte bancaire (Visa, Mastercard) et PayPal." },
